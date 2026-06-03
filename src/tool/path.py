@@ -31,9 +31,7 @@ class _PathFile:
 
 @dataclass(frozen = True)
 class PathConfig:
-    pass
-    # REPORT_RESULT = _PathFile.report
-    # EXPERIMENT_DETAILS = _PathFile.report / "experiment_detail.csv"
+    GEMINI_KEY = _PathFile.root / "key.env"
 
 
 def setup_filesystem():
