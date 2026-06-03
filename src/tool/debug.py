@@ -1,7 +1,3 @@
-# info.filename → 呼叫程式所在檔案名稱
-# info.lineno → 呼叫程式的行號
-# info.function → 呼叫函式名稱
-# info.code_context → 呼叫程式的原始程式碼
 import datetime
 import inspect
 import os
