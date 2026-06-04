@@ -2,7 +2,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-from debug import dbg
+from tool.debug import dbg
 
 
 def _resource_path(*paths):
