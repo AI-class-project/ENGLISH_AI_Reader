@@ -34,12 +34,13 @@ class KeyManager:
 
             # 終極防護網：如果真的還是找不到，印出檔案內容
             if not keys_list:
+                read_word_max: int = 150 # 只讀前 150 個字，避免印出太多
                 with open(env_path, 'r', encoding='utf-8', errors='ignore') as f:
-                    raw_content = f.read(150) # 只讀前 150 個字，避免印出太多
+                    raw_content = f.read(read_word_max)
 
                 dbg.error(f"❌ 檔案 {env_path} 明明存在，但就是抓不到 Key！")
                 dbg.error(f"👉 請檢查您的變數名稱，必須是 GEMINI_API_KEYS=您的金鑰")
-                dbg.error(f"👉 以下是系統實際讀取到的【檔案前 150 個字元】：\n{repr(raw_content)}")
+                dbg.error(f"👉 以下是系統實際讀取到的【檔案前 {read_word_max} 個字元】：\n{repr(raw_content)}")
                 return []
 
             return keys_list
