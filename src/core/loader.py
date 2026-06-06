@@ -1,6 +1,6 @@
 import json
 
-from core.models import ToeicQuestionModel
+from core.models import QuestionOptions, ToeicQuestionModel, ToeicSubQuestion
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -22,34 +22,38 @@ class ToeicPoolLoader:
             with open(self.pool_path, "r", encoding="utf-8") as f:
                 raw_data = json.load(f)
 
-            # 💡 核心轉換防線：將 Dict 陣列一筆一筆轉回強型別物件
-            # 因為我們 batch_runner 存檔時已經是結構化結構，這裡可以直接從資料組裝
             models_pool = []
             for chunk in raw_data:
-                # 這裡可以直接調用我們模型的 from_ai_chunk，或是直接用類別實例化
-                # 為了安全與相容性，我們直接透過 values 轉換或直接將轉換好的結構映射回來
-                from core.models import QuestionOptions, ToeicSubQuestion
-
-                # 還原子題目
+                # 💡 對齊純字串合約，直接使用一般字串提取資料
                 sub_qs = []
                 for q in chunk.get("questions", []):
                     opts = q.get("options", {})
+
+                    # 提取選項
+                    options_obj = QuestionOptions(
+                        A=opts.get("A", ""),
+                        B=opts.get("B", ""),
+                        C=opts.get("C", ""),
+                        D=opts.get("D", "")
+                    )
+
+                    # 提取子題目核心屬性
                     sub_qs.append(ToeicSubQuestion(
                         question=q.get("question", ""),
-                        options=QuestionOptions(A=opts.get("A",""), B=opts.get("B",""), C=opts.get("C",""), D=opts.get("D","")),
+                        options=options_obj,
                         answer=q.get("answer", ""),
                         explanation=q.get("explanation", "")
                     ))
 
-                # 組裝大物件
+                # 組裝頂層大物件
                 model_obj = ToeicQuestionModel(
-                    category=chunk.get("category", ""),
+                    category=chunk.get("category", "未定義題型"),
                     passages=chunk.get("passages", []),
                     questions=sub_qs
                 )
                 models_pool.append(model_obj)
 
-            dbg.log(f"✅ 成功載入並封裝 {len(models_pool)} 組多益題組物件！")
+            dbg.log(f"✅ 成功載入並強型別封裝 {len(models_pool)} 組多益題組物件！")
             return models_pool
 
         except Exception as e:

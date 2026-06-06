@@ -2,22 +2,24 @@ from enum import StrEnum
 
 
 class ToeicGenCol(StrEnum):
+    """【輸入端】發射器控制參數專用 Key"""
     CATEGORY = "category"
     THEME = "theme"
     GRAMMAR_FOCUS = "grammar_focus"
     READING_RELATION = "reading_relation"
 
 class ToeicQuestionCol(StrEnum):
-    """AI 回傳題目 JSON 欄位的專用 Key (徹底消滅魔法字串)"""
+    """【輸出端】AI 生成 JSON 與 DTO 物件欄位專用 Key"""
     CATEGORY = "category"
-    PASSAGE = "passage"
+    PASSAGES = "passages"
+    QUESTIONS = "questions"
     QUESTION = "question"
-
-    # 選項原始欄位
-    OPTION_A = "option_a"
-    OPTION_B = "option_b"
-    OPTION_C = "option_c"
-    OPTION_D = "option_d"
-
+    OPTIONS = "options"
     ANSWER = "answer"
     EXPLANATION = "explanation"
+
+class OptionKey(StrEnum):
+    A = "A"
+    B = "B"
+    C = "C"
+    D = "D"

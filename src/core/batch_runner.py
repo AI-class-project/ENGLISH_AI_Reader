@@ -4,8 +4,7 @@ import json
 import time
 
 from core.const import ToeicGenCol
-from core.generator import ToeicGenerator
-# from core.meta.toeic import MetaManager, QuestionType
+from core.generator import ToeicGenerator, ToeicQuestionCol
 from core.models import ToeicQuestionModel
 from tool.debug import dbg
 from tool.path import PathConfig
@@ -22,8 +21,8 @@ class ToeicBatchRunner:
     def generate_batch(self, count: int, config: dict) -> list[ToeicQuestionModel]:
         """
         批次生成特定題型，並在第一時間將其轉換為 UI 友善的強型別巢狀物件 (ToeicQuestionModel)
-        備註：這裡的 count 代表「題組數量」(例如 4 個閱讀題組，可能會包含將近 20 小題)
         """
+        # ✅ 升級 1：使用 ToeicGenCol 安全獲取外部控制引數
         category = config.get(ToeicGenCol.CATEGORY.value, "未定義題型")
         theme = config.get(ToeicGenCol.THEME.value, "通用商務")
         dbg.log(f"開始批次生產任務：【{category}】預計目標總數：{count} 題組，情境：{theme}")
@@ -38,23 +37,28 @@ class ToeicBatchRunner:
             attempt += 1
             dbg.log(f"進度：({len(generated_list)}/{count}) | 正在執行第 {attempt} 次生成嘗試...")
 
-            # 呼叫 AI 引擎，取得扁平的 dict 陣列
+            # 呼叫 AI 引擎，取得符合巢狀結構的單一 dict 大物件
             questions_chunk = self.generator.generate_question(**config)
 
             if not questions_chunk:
                 dbg.war("該次嘗試未取得有效資料，跳過。")
                 continue
 
-            # 💡 1. 執行聯合指紋防重過濾
-            valid_chunk = []
-            for question_data in questions_chunk:
-                passage_text = question_data.get(ToeicGenCol.PASSAGE.value, "").strip()
-                q_text = question_data.get(ToeicGenCol.QUESTION.value, "").strip()
+            # ✅ 升級 2：全面使用 ToeicQuestionCol 提取內層資料，消滅裸露的 "passages" 與 "questions" 字串
+            raw_passages = questions_chunk.get(ToeicQuestionCol.PASSAGES.value, [])
+            raw_questions = questions_chunk.get(ToeicQuestionCol.QUESTIONS.value, [])
 
+            # 擷取第一篇文章的前 20 個字元作為文章指紋前綴
+            passage_prefix = raw_passages[0][:20] if raw_passages else ""
+
+            valid_questions = []
+            for q in raw_questions:
+                # ✅ 升級 3：使用 ToeicQuestionCol 安全提取子題目欄位 "question"
+                q_text = q.get(ToeicQuestionCol.QUESTION.value, "").strip()
                 if not q_text:
                     continue
 
-                passage_prefix = passage_text[:20] if passage_text else ""
+                # 組合特徵：文章前綴 + 問題主體
                 unique_feature = f"{passage_prefix}_{q_text}"
                 fingerprint = hashlib.md5(unique_feature.encode('utf-8')).hexdigest()
 
@@ -63,15 +67,20 @@ class ToeicBatchRunner:
                     continue
 
                 existing_fingerprints.add(fingerprint)
-                valid_chunk.append(question_data)
+                valid_questions.append(q)
 
-            if not valid_chunk:
+            # 如果這一組所有的子題目都被重置濾光了，則放棄本組
+            if not valid_questions:
                 continue
 
-            # 💡 2. 【核心修復】將過濾完的扁平資料，直接封裝成「巢狀大物件」！
+            # 將通過去重的子題目重新塞回大物件中
+            questions_chunk[ToeicQuestionCol.QUESTIONS.value] = valid_questions
+
+            # 💡 3. 將過濾完的強型別巢狀字典，完美還原封裝成高階物件
             try:
-                question_model = ToeicQuestionModel.from_ai_chunk(valid_chunk)
-                generated_list.append(question_model) # 存入的是大物件，所以每次只加 1
+                # 這裡調用模型更新後的 from_ai_dict 轉換器
+                question_model = ToeicQuestionModel.from_ai_dict(questions_chunk)
+                generated_list.append(question_model)
                 dbg.var(current_pool_size=len(generated_list))
             except Exception as e:
                 dbg.error(f"❌ 封裝模型失敗: {e}")

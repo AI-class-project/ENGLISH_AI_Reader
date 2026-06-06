@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.batch_runner import ToeicBatchRunner
 from core.loader import ToeicPoolLoader
-from core.toeic_meta import MetaManager, QuestionType
+from core.meta.toeic import MetaManager, QuestionType
 from tool.debug import dbg
 
 
