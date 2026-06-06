@@ -20,6 +20,41 @@ class ToeicBatchRunner:
         self.generator = ToeicGenerator()
         self.output_dir = PathConfig.TOEIC_POOL
 
+    def _load_historical_fingerprints(self) -> set:
+        """讀取本地題庫，預載歷史題目的 MD5 指紋以防止跨次執行撞車"""
+        fingerprints = set()
+        file_exists = self.output_dir.exists() if hasattr(self.output_dir, "exists") else os.path.exists(self.output_dir)
+
+        if not file_exists:
+            return fingerprints
+
+        try:
+            with open(self.output_dir, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+
+                for item in existing_data:
+                    raw_passages = item.get(ToeicQuestionCol.PASSAGES.value, [])
+                    raw_questions = item.get(ToeicQuestionCol.QUESTIONS.value, [])
+
+                    # 擷取歷史文章前綴
+                    passage_prefix = raw_passages[0][:GENERATE_BATCH_CONFIG.PASSAGE_PREFIX_MAX] if raw_passages else ""
+
+                    for q in raw_questions:
+                        q_text = q.get(ToeicQuestionCol.QUESTION.value, "").strip()
+                        if not q_text:
+                            continue
+
+                        # 復刻特徵組合演算法並塞入 set
+                        unique_feature = f"{passage_prefix}_{q_text}"
+                        hist_fp = hashlib.md5(unique_feature.encode('utf-8')).hexdigest()
+                        fingerprints.add(hist_fp)
+
+            dbg.log(f"🛡️ 系統啟動：成功從本地快取預載 {len(fingerprints)} 筆歷史題目指紋防線。")
+        except (json.JSONDecodeError, Exception) as e:
+            dbg.war(f"⚠️ 無法讀取歷史題庫建立指紋，將以空集合啟動: {e}")
+
+        return fingerprints
+
     def generate_batch(self, count: int, config: dict) -> list[ToeicQuestionModel]:
         """
         批次生成特定題型，並在第一時間將其轉換為 UI 友善的強型別巢狀物件 (ToeicQuestionModel)
@@ -29,7 +64,8 @@ class ToeicBatchRunner:
         dbg.log(f"開始批次生產任務：【{category}】預計目標總數：{count} 題組，情境：{theme}")
 
         generated_list = []
-        existing_fingerprints = set()
+        # 在開始批次循環前，先讀取硬碟中的舊資料建立第一道防線
+        existing_fingerprints = self._load_historical_fingerprints()
 
         attempt = 0
         max_attempts = int(count * GENERATE_BATCH_CONFIG.ATTEMPTS_RATIO_MAX)
@@ -62,7 +98,7 @@ class ToeicBatchRunner:
                 fingerprint = hashlib.md5(unique_feature.encode('utf-8')).hexdigest()
 
                 if fingerprint in existing_fingerprints:
-                    dbg.war(f"🔄 偵測到重複題目！自動跳過該子題目。")
+                    dbg.war(f"🔄 偵測到與歷史題庫或當前批次重複之題目！自動跳過該子題目。")
                     continue
 
                 existing_fingerprints.add(fingerprint)

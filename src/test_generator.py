@@ -32,7 +32,7 @@ def run_factory():
     dbg.log("👤 使用者請求：給我 1 題『單選題』與 1 題『閱讀題』...")
 
     dbg.log("🔄 正在生產單選題大物件...")
-    factory.generate_questions(count=4, category=QuestionCategory.SINGLE_CHOICE)
+    factory.generate_questions(count=3, category=QuestionCategory.SINGLE_CHOICE)
 
     dbg.log("🔄 正在生產閱讀題大物件...")
     factory.generate_questions(count=3, category=QuestionCategory.READING)
