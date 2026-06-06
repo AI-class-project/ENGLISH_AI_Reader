@@ -80,6 +80,42 @@
     ]
   },
   {
+    "category": "文法選擇",
+    "theme": "客戶投訴與售後服務",
+    "passages": [],
+    "questions": [
+      {
+        "question": "The technical support team ______ the issue with the software update for three hours before they finally discovered the root cause of the error.",
+        "options": {
+          "A": "is investigating",
+          "B": "has investigated",
+          "C": "had been investigating",
+          "D": "investigates"
+        },
+        "answer": "C",
+        "explanation": "本題考查過去完成進行式（had been + V-ing）。句中提到「直到他們發現問題根源之前」已經「持續調查了三小時」，動作發生在過去的某個時間點之前，且持續了一段時間，因此應使用過去完成進行式。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "辦公室日常與人事公告",
+    "passages": [],
+    "questions": [
+      {
+        "question": "The human resources manager decided ______ the hiring process until the new budget proposal is approved by the board of directors.",
+        "options": {
+          "A": "postponing",
+          "B": "to postpone",
+          "C": "postpone",
+          "D": "postponed"
+        },
+        "answer": "B",
+        "explanation": "本題考點為不定詞與動名詞的選用。動詞 decide 後面只能接不定詞（to V）作為受詞，不能直接接動名詞（V-ing）或原形動詞。因此，正確答案為 to postpone。"
+      }
+    ]
+  },
+  {
     "category": "單篇閱讀理解",
     "theme": "跨部門電子郵件溝通",
     "passages": [
@@ -353,6 +389,114 @@
         },
         "answer": "D",
         "explanation": "Marcus 在 10 月 25 日購買，符合 10 月 31 日前的促銷條件，因此他具備領取贈品的資格。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "廠房公安與生產線維護 (Factory Safety & Maintenance)",
+    "passages": [
+      "[DOC 1] MEMORANDUM\nTo: All Production Staff\nFrom: Facilities Management Department\nDate: October 12, 2023\nSubject: Scheduled Maintenance and Safety Protocols\n\nPlease be advised that the main assembly line (Line 4) will undergo mandatory safety inspections and routine maintenance starting from October 20th at 8:00 AM to October 22nd at 5:00 PM. During this period, the sector will be strictly off-limits to all personnel without an authorized high-visibility vest and a safety clearance badge. Furthermore, all staff are reminded to review the updated 'Machine Lockout/Tagout' procedures posted on the company portal. Failure to comply with these safety protocols will result in immediate suspension of facility access privileges.",
+      "[DOC 2] EMAIL\nFrom: James Miller <j.miller@factory-ops.com>\nTo: Facilities Management Department\nDate: October 13, 2023\nSubject: Re: Scheduled Maintenance and Safety Protocols\n\nDear Facilities Team,\nI am writing to clarify the requirements for the upcoming maintenance on Line 4. My team is scheduled to complete a final quality audit on the products produced on that line before the shutdown begins. Could you please confirm if we are permitted to access the area on the morning of October 20th? Additionally, we have misplaced our safety clearance badges. Is there a temporary pass we can provide, or should we visit the security office before the shift starts on the 20th to get replacements? Thank you for your assistance.\nBest regards, James Miller."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the memorandum?",
+        "options": {
+          "A": "To request volunteers for maintenance work.",
+          "B": "To announce a temporary shutdown for maintenance and safety inspections.",
+          "C": "To update the factory's production targets.",
+          "D": "To introduce a new manager for the Facilities Department."
+        },
+        "answer": "B",
+        "explanation": "公告主要目的是通知生產線4號將進行維護與安全檢查，並提醒相關安全規範。"
+      },
+      {
+        "question": "According to DOC 1, what must employees have to enter the maintenance zone?",
+        "options": {
+          "A": "A written permit from the CEO.",
+          "B": "A specialized maintenance tool kit.",
+          "C": "A high-visibility vest and a safety clearance badge.",
+          "D": "A completed safety certification certificate."
+        },
+        "answer": "C",
+        "explanation": "文中明確指出進入區域需配備高能見度背心與安全許可證。"
+      },
+      {
+        "question": "What is James Miller's main concern regarding the maintenance schedule?",
+        "options": {
+          "A": "The duration of the shutdown is too long.",
+          "B": "His team needs to perform an audit before the line closes.",
+          "C": "The new safety protocols are too difficult to follow.",
+          "D": "He has not received the official training for the maintenance."
+        },
+        "answer": "B",
+        "explanation": "James Miller詢問是否能在維護開始前進入生產線進行最後的品質稽核。"
+      },
+      {
+        "question": "What does James Miller need to resolve before the maintenance starts?",
+        "options": {
+          "A": "He needs to find his missing safety clearance badges.",
+          "B": "He must submit a request for overtime pay.",
+          "C": "He needs to sign up for the lockout/tagout training.",
+          "D": "He needs to replace his damaged high-visibility vest."
+        },
+        "answer": "A",
+        "explanation": "James Miller在信中提到他們遺失了安全許可證，並詢問如何取得補發。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "辦公室日常與人事公告",
+    "passages": [
+      "[DOC 1] \n\nElite Office Solutions – Summer Special Promotion\n\nAre you tired of outdated office furniture? Upgrade your workspace today! Elite Office Solutions is proud to announce our 'Summer Efficiency Drive.' From July 1st to July 31st, all ergonomic office chairs and standing desks are 25% off. \n\nWe guarantee delivery within 3 business days for all orders placed within the metropolitan area. Our professional assembly team will set up your new equipment free of charge. Visit our showroom at 452 Commerce Street or browse our catalog at www.eliteofficesolutions.com. Don't miss out on this chance to boost your office productivity!",
+      "[DOC 2]\n\nTo: Customer Service Department\nFrom: Marcus Thorne, Operations Manager\nDate: July 12\nSubject: Order #8892 - Unacceptable Delay\n\nI am writing to express my frustration regarding an order (Ref: #8892) placed on July 5th. According to your promotional advertisement, your company guarantees a 3-business-day delivery window for metropolitan orders. It has been a week, and I have yet to receive the four ergonomic chairs I ordered for my team. \n\nTo make matters worse, I called your support line yesterday and was placed on hold for over 40 minutes before the call was disconnected. I need these chairs by the end of the week, or I will be forced to cancel the order and request a full refund. Please provide an immediate update on the status of my shipment."
+    ],
+    "questions": [
+      {
+        "question": "What is the main purpose of the advertisement in [DOC 1]?",
+        "options": {
+          "A": "To recruit new assembly staff for the company.",
+          "B": "To announce a temporary discount on office equipment.",
+          "C": "To provide instructions on how to maintain office furniture.",
+          "D": "To invite the public to an office equipment trade show."
+        },
+        "answer": "B",
+        "explanation": "廣告明確指出在7月進行「夏季效率推動」活動，提供人體工學椅與升降桌25%的折扣。"
+      },
+      {
+        "question": "According to [DOC 1], what benefit is provided to customers who purchase furniture?",
+        "options": {
+          "A": "A two-year warranty on all electronic desks.",
+          "B": "Free delivery to locations outside the metropolitan area.",
+          "C": "Complimentary setup service by a professional team.",
+          "D": "A free consultation for interior office design."
+        },
+        "answer": "C",
+        "explanation": "文章提到「Our professional assembly team will set up your new equipment free of charge」，即免費組裝服務。"
+      },
+      {
+        "question": "Why is Marcus Thorne dissatisfied with Elite Office Solutions?",
+        "options": {
+          "A": "The chairs he received were of poor quality.",
+          "B": "The discount offered was not applied to his invoice.",
+          "C": "The delivery took longer than the promised timeframe.",
+          "D": "The company refused to provide a refund for his order."
+        },
+        "answer": "C",
+        "explanation": "廣告承諾3個工作天內送達，但Marcus在7月5日下單，到了7月12日尚未收到貨，明顯延誤。"
+      },
+      {
+        "question": "What does Marcus Thorne threaten to do if his order does not arrive soon?",
+        "options": {
+          "A": "File a formal complaint with the Better Business Bureau.",
+          "B": "Cancel the order and ask for his money back.",
+          "C": "Write a negative review on the company's website.",
+          "D": "Visit the showroom to demand an explanation in person."
+        },
+        "answer": "B",
+        "explanation": "信件最後一段提到：「I will be forced to cancel the order and request a full refund」，即取消訂單並要求全額退款。"
       }
     ]
   }

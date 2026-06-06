@@ -12,7 +12,7 @@ def run_factory():
 
     factory = ToeicQuestionFactory()
 
-    factory.generate_questions(count=2, category=QuestionCategory.READING)
+    factory.generate_questions(count=2, category=QuestionCategory.SINGLE_CHOICE)
 
     print("\n" + "-"*50)
     dbg.log("📖 驗證存檔結果...")
