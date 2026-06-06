@@ -24,7 +24,8 @@ def _resource_path(*paths):
 @dataclass(frozen = True)
 class _PathFile:
     """第一層：專門定義資料夾骨架，確保裡面全部都是純目錄"""
-    root = _resource_path()
+    ROOT = _resource_path()
+    DATA = _resource_path("data")
 
     @classmethod
     def get_all_paths(cls):
@@ -33,8 +34,8 @@ class _PathFile:
 @dataclass(frozen = True)
 class PathConfig:
     """第二層：面向應用的配置，組合或繼承第一層，可以包含檔案"""
-    GEMINI_KEY = _PathFile.root / "key.env"
-
+    GEMINI_KEY = _PathFile.ROOT / "key.env"
+    TOEIC_POOL = _PathFile.DATA / "toeic_pool.json"
 
 def setup_filesystem():
     """

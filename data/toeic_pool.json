@@ -1,0 +1,35 @@
+[
+  {
+    "category": "Grammar",
+    "passage": "",
+    "question": "The marketing director suggested that the promotional materials ______ in time for the upcoming international trade show in Frankfurt.",
+    "option_a": "be printed",
+    "option_b": "are printed",
+    "option_c": "will be printed",
+    "option_d": "to be printed",
+    "answer": "A",
+    "explanation": "【翻譯】行銷總監建議宣傳資料應在即將到來的法蘭克福國際商展前印製完成。【解析】本題考查「建議」動詞（suggest）後的子句用法。當主句動詞為 suggest, recommend, insist, demand 等表示建議或要求的動詞時，後方 that 子句中的動詞應使用「原形動詞」（subjunctive mood），若為被動語態，則為 (should) be + p.p.，故選 (A)。"
+  },
+  {
+    "category": "Grammar",
+    "passage": "",
+    "question": "The marketing director requested that all exhibition staff ______ at the booth fifteen minutes before the trade show begins to ensure everything is ready.",
+    "option_a": "will arrive",
+    "option_b": "arrive",
+    "option_c": "arrived",
+    "option_d": "arriving",
+    "answer": "B",
+    "explanation": "【翻譯】行銷總監要求所有參展人員在展覽開始前十五分鐘抵達攤位，以確保一切準備就緒。【解析】本題考查「建議、要求、命令」動詞（如 request, suggest, demand, insist）後的子句用法。當這些動詞後接 that 引導的子句時，子句中的動詞必須使用「原形動詞」，即省略了 should。因此，正確答案為 arrive。"
+  },
+  {
+    "category": "Grammar",
+    "passage": "",
+    "question": "The marketing director requested that all promotional materials ______ finalized before the international trade show begins next week.",
+    "option_a": "are",
+    "option_b": "be",
+    "option_c": "were",
+    "option_d": "will be",
+    "answer": "B",
+    "explanation": "【翻譯】行銷總監要求所有的宣傳資料必須在下週國際貿易展開始前定案。【解析】本題考查「假設語氣」（Subjunctive Mood）。當主要子句的動詞為 request, suggest, recommend, demand, insist 等表示「建議、要求、命令」的動詞時，後方 that 引導的子句動詞需使用「原形動詞」。因此，正確選項為 B (be)。"
+  }
+]

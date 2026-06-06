@@ -1,10 +1,4 @@
-import os
-import sys
-
-# 確保 Python 執行時能正確將 src 的上一層（專案根目錄）加入路徑
-# 這樣在不同資料夾下執行都不會噴出 ModuleNotFoundError
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+from core.batch_runner import ToeicBatchRunner
 from core.generator import ToeicGenerator
 from tool.debug import dbg
 
@@ -55,5 +49,14 @@ def run_pipeline_test():
     dbg.log("🏁 [測試結束] 診斷程序執行完畢")
     print("="*60 + "\n")
 
+# ==========================================
+# 批次生產測試執行點
+# ==========================================
 if __name__ == "__main__":
-    run_pipeline_test()
+    runner = ToeicBatchRunner()
+
+    # 範例：一口氣生產 3 題文法選擇題
+    pool = runner.generate_batch(category="文法選擇", count=3, theme="國際商務會議與展覽")
+
+    if pool:
+        runner.save_to_json(pool)
