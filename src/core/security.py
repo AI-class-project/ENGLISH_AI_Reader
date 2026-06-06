@@ -2,7 +2,7 @@ import traceback
 
 from dotenv import dotenv_values
 
-from core.const import GlobalVar
+from const import GlobalVar
 from tool.debug import dbg
 from tool.path import PathConfig
 
