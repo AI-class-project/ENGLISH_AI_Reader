@@ -1,67 +1,77 @@
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from core.batch_runner import ToeicBatchRunner
-from core.meta.toeic import MetaManager, QuestionType
+from core.loader import ToeicPoolLoader
+from core.toeic_meta import MetaManager, QuestionType
 from tool.debug import dbg
 
 
-def run_batch_pipeline_test():
-    """驗證結合元資料中心 (Meta) 與批次工具 (Runner) 的全新管線測試"""
+def run_end_to_end_pipeline_test():
     print("\n" + "="*60)
-    dbg.log("🚀 [開始測試] 啟動多益全自動出題管線綜合測試")
+    dbg.log("🔥 [終極管線測試] 啟動多益 API 出題、儲存、提出並還原物件全流程測試")
     print("="*60)
 
-    try:
-        # 初始化批次運行器
-        runner = ToeicBatchRunner()
+    # --------------------------------------------------
+    # 【前半段：出題與儲存】
+    # --------------------------------------------------
+    runner = ToeicBatchRunner()
+    dbg.log("【1/3】向元資料中心索取［雙篇/多篇閱讀理解］配置藍圖...")
+    multiple_reading_config = MetaManager.get_batch_config(QuestionType.READING_MULTIPLE)
 
-        # 1. 測試隨機文法選擇題批次生成
-        dbg.log("1. [文法選擇] 測試隨機配置生成...")
-        grammar_config = MetaManager.get_batch_config(QuestionType.GRAMMAR)
+    dbg.log("【2/3】啟動 AI 引擎進行批次出題與後台自動分水嶺文章切分...")
+    # 這裡我們模擬生成 1 大組（內含 4~5 小題）
+    pool_data = runner.generate_batch(count=4, config=multiple_reading_config)
 
-        # 執行生成 (數量給 2 題快速驗證即可)
-        grammar_pool = runner.generate_batch(count=2, config=grammar_config)
+    if not pool_data:
+        dbg.error("❌ 前半段生成失敗，測試中斷")
+        return
 
-        if grammar_pool:
-            dbg.log(f"🎉 [文法選擇] 順利產出 {len(grammar_pool)} 題！")
-        else:
-            dbg.error("❌ [文法選擇] 生成失敗，未取得有效池資料。")
+    dbg.log("【3/3】將生成數據結構化並寫入本地 JSON 緩存...")
+    runner.save_to_json(pool_data)
 
-        print("-" * 50)
+    print("-" * 50)
 
-        # 2. 測試隨機單字克漏字批次生成
-        dbg.log("2. [單字克漏字] 測試隨機配置生成...")
-        vocab_config = MetaManager.get_batch_config(QuestionType.VOCABULARY)
+    # --------------------------------------------------
+    # 【後半段：提出 JSON、還原物件、UI 模擬印出】
+    # --------------------------------------------------
+    dbg.log("【4/6】實例化載入器，準備從本地檔案提出 JSON...")
+    loader = ToeicPoolLoader()
 
-        vocab_pool = runner.generate_batch(count=2, config=vocab_config)
+    dbg.log("【5/6】執行反序列化，將 JSON 數據徹底封裝成強型別物件模型...")
+    object_pool = loader.load_cached_pool()
 
-        if vocab_pool:
-            dbg.log(f"🎉 [單字克漏字] 順利產出 {len(vocab_pool)} 題！")
-        else:
-            dbg.error("❌ [單字克漏字] 生成失敗，未取得有效池資料。")
+    if not object_pool:
+        dbg.error("❌ 後半段載入轉換失敗")
+        return
 
-        # 3. 統一打包存檔測試 (會融合文法與單字)
-        if grammar_pool or vocab_pool:
-            total_pool = (grammar_pool or []) + (vocab_pool or [])
-            dbg.log(f"3. [存檔測試] 正在將總計 {len(total_pool)} 題寫入本地儲存區...")
-            runner.save_to_json(total_pool)
+    dbg.log("【6/6】［模擬 UI 端接收］正式對著物件取用屬性並印出畫面驗證...")
+    for group_idx, exam_model in enumerate(object_pool):
+        print(f"\n🖥️ ======= UI 渲染視窗 (第 {group_idx + 1} 組題組) =======")
+        print(f"📌 題型分類: {exam_model.category}")
 
-    except Exception as e:
-        import traceback
-        dbg.error(f"🚨 測試管線中途發生毀滅性崩潰: {e}")
-        print(traceback.format_exc())
+        # UI 取用明確的分水嶺文章清單
+        print(f"📖 偵測到本題組包含 {len(exam_model.passages)} 篇文章：")
+        for doc_idx, doc_text in enumerate(exam_model.passages):
+            print(f"  --- [文章分頁 {doc_idx + 1}] ---")
+            print(f"  {doc_text[:100]}... (略)") # 只印前100字代表分頁成功
+
+        print(f"\n📝 右側子題目渲染：")
+        # UI 取用子題目清單
+        for sub_idx, sub_q in enumerate(exam_model.questions):
+            print(f"  {sub_idx + 1}. {sub_q.question}")
+            print(f"     (A) {sub_q.options.A}")
+            print(f"     (B) {sub_q.options.B}")
+            print(f"     (C) {sub_q.options.C}")
+            print(f"     (D) {sub_q.options.D}")
+            print(f"     👉 官方標準答案: [{sub_q.answer}]")
+        print("==================================================\n")
 
     print("="*60)
-    dbg.log("🏁 [測試結束] 診斷程序執行完畢")
+    dbg.log("🏁 [測試結束] 全管線點火成功，後台與 UI 完美合約對接！")
     print("="*60 + "\n")
 
 if __name__ == "__main__":
-    runner = ToeicBatchRunner()
-
-    # 測試最高殿堂：隨機抽取「雙篇/多篇閱讀理解」配置！
-    dbg.log("🔥 正在索取【雙篇/多篇閱讀理解】全自動配置藍圖...")
-    multiple_reading_config = MetaManager.get_batch_config(QuestionType.READING_MULTIPLE)
-
-    # 執行生成 4 題
-    pool = runner.generate_batch(count=4, config=multiple_reading_config)
-
-    if pool:
-        runner.save_to_json(pool)
+    run_end_to_end_pipeline_test()

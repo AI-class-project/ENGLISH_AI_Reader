@@ -33,7 +33,7 @@ class ToeicQuestionModel:
         category = base_data.get(ToeicQuestionCol.CATEGORY.value, "未定義題型")
         raw_passage = base_data.get(ToeicQuestionCol.PASSAGE.value, "").strip()
 
-        # 自動切分多篇文章
+        # 💡 【核心分水嶺技術】：後台自動切分多篇文章
         passages_list = []
         if raw_passage:
             # 使用正則表達式，尋找 [DOC 1], [DOCUMENT 2], --- 等常見 AI 標記進行切分
@@ -63,6 +63,6 @@ class ToeicQuestionModel:
 
         return cls(
             category=category,
-            passages=passages_list,
+            passages=passages_list, # 注入切分好的乾淨 list
             questions=sub_questions
         )

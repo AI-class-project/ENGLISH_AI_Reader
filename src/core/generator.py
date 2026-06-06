@@ -94,6 +94,7 @@ class ToeicGenerator:
                 f"   請將整套內容打包放在唯一的 `passage` 欄位中。\n"
                 f"2. 針對這組互相關聯的文章，出 {sub_count} 個子題目..."
             )
+
         else:
             prompt = f"請生成一組【{category}】題目，情境設定為【{theme}】。"
 

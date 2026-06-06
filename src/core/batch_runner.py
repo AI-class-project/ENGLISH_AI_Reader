@@ -1,9 +1,12 @@
+import dataclasses
 import hashlib
 import json
 import time
 
+from core.const import ToeicGenCol
 from core.generator import ToeicGenerator
-from core.meta.toeic import ToeicGenCol
+# from core.meta.toeic import MetaManager, QuestionType
+from core.models import ToeicQuestionModel
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -16,13 +19,14 @@ class ToeicBatchRunner:
         self.output_dir = PathConfig.TOEIC_POOL
         self.max_attempts_ratio: float = 2.0
 
-    def generate_batch(self, count: int, config: dict) -> list[dict]:
+    def generate_batch(self, count: int, config: dict) -> list[ToeicQuestionModel]:
         """
-        批次生成特定題型，支援單題與閱讀題組的指紋去重機制
+        批次生成特定題型，並在第一時間將其轉換為 UI 友善的強型別巢狀物件 (ToeicQuestionModel)
+        備註：這裡的 count 代表「題組數量」(例如 4 個閱讀題組，可能會包含將近 20 小題)
         """
         category = config.get(ToeicGenCol.CATEGORY.value, "未定義題型")
         theme = config.get(ToeicGenCol.THEME.value, "通用商務")
-        dbg.log(f"開始批次生產任務：【{category}】預計目標總數：{count} 題，情境：{theme}")
+        dbg.log(f"開始批次生產任務：【{category}】預計目標總數：{count} 題組，情境：{theme}")
 
         generated_list = []
         existing_fingerprints = set()
@@ -30,53 +34,62 @@ class ToeicBatchRunner:
         attempt = 0
         max_attempts = int(count * self.max_attempts_ratio)
 
-        # 只要目前的題目庫數量還沒達到指定的 count，就繼續生
         while len(generated_list) < count and attempt < max_attempts:
             attempt += 1
             dbg.log(f"進度：({len(generated_list)}/{count}) | 正在執行第 {attempt} 次生成嘗試...")
 
-            # 呼叫更新後的引擎 (此處回傳的必然是 list[dict])
+            # 呼叫 AI 引擎，取得扁平的 dict 陣列
             questions_chunk = self.generator.generate_question(**config)
 
             if not questions_chunk:
                 dbg.war("該次嘗試未取得有效資料，跳過。")
                 continue
 
-            # 處理這一批次吐出來的題目
+            # 💡 1. 執行聯合指紋防重過濾
             valid_chunk = []
             for question_data in questions_chunk:
-                passage_text = question_data.get("passage", "").strip()
-                q_text = question_data.get("question", "").strip()
+                passage_text = question_data.get(ToeicGenCol.PASSAGE.value, "").strip()
+                q_text = question_data.get(ToeicGenCol.QUESTION.value, "").strip()
 
-                # 指紋依據
-                fingerprint_source = passage_text if passage_text else q_text
-                if not fingerprint_source:
+                if not q_text:
                     continue
 
-                fingerprint = hashlib.md5(fingerprint_source.encode('utf-8')).hexdigest()
+                passage_prefix = passage_text[:20] if passage_text else ""
+                unique_feature = f"{passage_prefix}_{q_text}"
+                fingerprint = hashlib.md5(unique_feature.encode('utf-8')).hexdigest()
 
                 if fingerprint in existing_fingerprints:
-                    dbg.war(f"🔄 偵測到重複指紋！自動跳過該子題目。")
+                    dbg.war(f"🔄 偵測到重複題目！自動跳過該子題目。")
                     continue
 
                 existing_fingerprints.add(fingerprint)
                 valid_chunk.append(question_data)
 
-            # 將通過去重審查的題目塞進大池子裡
-            generated_list.extend(valid_chunk)
-            dbg.var(current_pool_size=len(generated_list))
+            if not valid_chunk:
+                continue
 
-            time.sleep(1.2) # 稍微加長一點睡眠，因為閱讀題生成的 Token 量較大
+            # 💡 2. 【核心修復】將過濾完的扁平資料，直接封裝成「巢狀大物件」！
+            try:
+                question_model = ToeicQuestionModel.from_ai_chunk(valid_chunk)
+                generated_list.append(question_model) # 存入的是大物件，所以每次只加 1
+                dbg.var(current_pool_size=len(generated_list))
+            except Exception as e:
+                dbg.error(f"❌ 封裝模型失敗: {e}")
 
-        dbg.log(f"🏁 批次生產結束！成功產出 {len(generated_list)} 題（總嘗試次數: {attempt}）")
-        # 如果因為隨機數量導致多生了幾題（例如目標 3 題，但閱讀題一吐就是 4 題），我們用切片精準裁切給使用者
+            time.sleep(1.2)
+
+        dbg.log(f"🏁 批次生產結束！成功產出 {len(generated_list)} 個題組（總嘗試次數: {attempt}）")
         return generated_list[:count]
 
-    def save_to_json(self, data: list[dict]):
+    def save_to_json(self, data: list[ToeicQuestionModel]):
+        """將高階巢狀物件清單，完美序列化為 JSON 存檔"""
         try:
+            # 🚀 利用 dataclasses.asdict 一鍵將整個巢狀物件拆解回 dict，準備寫入 JSON
+            serialized_data = [dataclasses.asdict(m) for m in data]
+
             with open(self.output_dir, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-            dbg.log(f"💾 【題庫匯出成功】檔案已成功寫入至: {self.output_dir}")
+                json.dump(serialized_data, f, ensure_ascii=False, indent=2)
+
+            dbg.log(f"💾 【結構化巢狀題庫匯出成功】檔案已成功寫入至: {self.output_dir}")
         except Exception as e:
             dbg.error(f"❌ 寫入 JSON 題庫檔案失敗: {e}")
-
