@@ -40,6 +40,14 @@ class ToeicGenerator:
         category = kwargs.get(ToeicGenCol.CATEGORY, "文法選擇")
         theme = kwargs.get(ToeicGenCol.THEME, "通用商務")
 
+        # 精準接住 MetaManager 幫我們抽出來的動態/靜態故事要素
+        get_val = lambda col, default: kwargs.get(col, kwargs.get(col.value, default))
+
+        context_event = kwargs.get(ToeicGenCol.FORCED_CONTEXT, "一般商務營運與日常聯繫")
+        char_1 = get_val(ToeicGenCol.FORCED_CHAR_1, "Alex")
+        char_2 = get_val(ToeicGenCol.FORCED_CHAR_2, "Blake")
+        date_str = get_val(ToeicGenCol.FORCED_DATE, "October 12")
+
         # --------------------------------------------------
         # 2. 使用 f-string 與 ToeicQuestionCol 動態建構鏡像 JSON 合約
         # --------------------------------------------------
@@ -48,6 +56,9 @@ class ToeicGenerator:
         if category in [QuestionType.GRAMMAR.value, QuestionType.VOCABULARY.value]:
             system_instruction = f"""
             你是一位專業的多益出題官方。請生成符合商務情境的全新【單選選擇題】。
+
+            【核心多樣性強制要求】
+            你必須完全圍繞使用者指定的「核心故事背景、人物與時間」進行出題，嚴禁使用 Marcus Thorne 或 Sarah Jenkins 等萬年撞車人名與無關情境。
 
             【強制要求】
             請直接輸出一個標準的 JSON 物件 (外層為大括號 {{ ... }})。
@@ -73,12 +84,24 @@ class ToeicGenerator:
             }}
             """
             focus = kwargs.get(ToeicGenCol.GRAMMAR_FOCUS, "高頻商務字彙辨析")
-            user_prompt = f"請生成 1 個【{category}】題目，情境設定為【{theme}】。核心考點必須鎖定在：【{focus}】。"
-            dbg.var(category=category, theme=theme, focus=focus)
+
+            user_prompt = (
+                f"請生成 1 個【{category}】題目。\n"
+                f"1. 核心大情境：【{theme}】\n"
+                f"2. 故事背景/突發事件：【{context_event}】\n"
+                f"3. 登場人物：【{char_1}】\n"
+                f"4. 時間設定：【{date_str}】\n"
+                f"5. 核心考點必須鎖定在：【{focus}】。\n"
+                f"請將上述背景與人物融合成一句高擬真多益填空題。"
+            )
+            dbg.var(category=category, theme=theme, context=context_event, char=char_1, focus=focus)
 
         elif category in [QuestionType.READING_SINGLE.value, QuestionType.READING_MULTIPLE.value]:
             system_instruction = f"""
             你是一位專業的多益閱讀題組設計專家。請生成具備情境深度的【閱讀理解題組】。
+
+            【核心多樣性強制要求】
+            你必須將故事的靈魂、天氣、環境景色、或突發事件完全聚焦在使用者指定的「核心故事背景」上，並嚴格使用指定的人名與時間，打破模型生成慣性。
 
             【強制要求】
             請直接輸出一個標準的 JSON 物件 (外層為大括號 {{ ... }})。
@@ -110,11 +133,16 @@ class ToeicGenerator:
             sub_count = random.randint(4, 5) if QuestionType.READING_MULTIPLE.value in category else random.randint(2, 3)
 
             user_prompt = (
-                f"請生成 1 個【{category}】題組，情境設定為【{theme}】。\n"
-                f"1. 你必須嚴格按照以下結構撰寫文章：【{relation}】。若包含多篇文章，每篇文章開頭請加上 [DOC 1] 或 [DOC 2] 標記。\n"
-                f"2. 針對這組文章，出 {sub_count} 個互不相同的子題目。"
+                f"請生成 1 個精緻的【{category}】題組。\n"
+                f"【必須完全遵循的實體故事限制條件】:\n"
+                f"1. 核心大情境與主題：【{theme}】\n"
+                f"2. 核心故事背景、天氣、景色或突發事件錨點：『{context_event}』\n"
+                f"3. 主要登場人物：『{char_1}』與『{char_2}』\n"
+                f"4. 故事發生的時間設定：『{date_str}』\n"
+                f"5. 文章結構要求：【{relation}】 (若包含多篇文章，開頭請標記 [DOC 1] 或 [DOC 2])\n\n"
+                f"請依據上述條件撰寫文本，並出 {sub_count} 個互不相同的子題目。"
             )
-            dbg.var(category=category, theme=theme, relation=relation, sub_questions=sub_count)
+            dbg.var(category=category, theme=theme, context=context_event, char_1=char_1, char_2=char_2, sub_questions=sub_count)
 
         else:
             dbg.error(f"❌ 引擎不支援此題型分類: {category}")

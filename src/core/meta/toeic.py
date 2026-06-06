@@ -3,6 +3,7 @@ import random
 from dataclasses import dataclass
 from enum import StrEnum
 
+from core.const import ToeicGenCol
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -122,33 +123,26 @@ class MetaManager:
     @staticmethod
     def get_batch_config(category: QuestionType) -> dict:
         """
-        根據指定的題型，動態分流並注入【動態網頁/靜態備援】的情境變數
+        根據指定的題型，動態分流並注入【動態網頁/靜態備援】的強型別安全變數配置
         """
-        # 1. 取得當前可用的最佳情境矩陣 (自動處理動靜態分流)
         matrix = MetaManager._get_active_theme_matrix()
-
-        # 2. 隨機抽選一個大情境字串
         chosen_theme = random.choice(list(matrix.keys()))
-
-        # 3. 從該情境專屬的池子裡，抽取出一個具體的核心事件/天氣/景色關鍵字
         specific_context = random.choice(matrix[chosen_theme])
-
-        # 4. 隨機抽選兩個不同的人名
         chars = random.sample(ToeicMetaPool.CHARACTERS, k=2)
 
         config = {
-            "category": category.value,
-            "theme": chosen_theme,
-            "forced_context": specific_context,
-            "forced_char_1": chars[0],
-            "forced_char_2": chars[1],
-            "forced_date": f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
+            ToeicGenCol.CATEGORY: category.value,
+            ToeicGenCol.THEME: chosen_theme,
+            ToeicGenCol.FORCED_CONTEXT: specific_context,
+            ToeicGenCol.FORCED_CHAR_1: chars[0],
+            ToeicGenCol.FORCED_CHAR_2: chars[1],
+            ToeicGenCol.FORCED_DATE: f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
         }
 
         if category == QuestionType.GRAMMAR:
-            config["grammar_focus"] = MetaManager.get_random_grammar_focus()
+            config[ToeicGenCol.GRAMMAR_FOCUS] = MetaManager.get_random_grammar_focus()
 
         if category == QuestionType.READING_MULTIPLE:
-            config["reading_relation"] = MetaManager.get_random_reading_relation()
+            config[ToeicGenCol.READING_RELATION] = MetaManager.get_random_reading_relation()
 
         return config
