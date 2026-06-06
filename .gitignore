@@ -1,1 +1,7 @@
 *.env
+
+/python/
+
+.venv
+
+pyrightconfig.json
