@@ -12,6 +12,10 @@ class QuestionType(StrEnum):
     READING_SINGLE = "單篇閱讀理解"
     READING_MULTIPLE = "雙篇/多篇閱讀理解"
 
+    @classmethod
+    def get_all_type(cls):
+        return [member for member in cls]
+
 @dataclass(frozen=True)
 class ToeicMetaPool:
     """多益出題情境與考點資料庫"""
@@ -70,8 +74,8 @@ class MetaManager:
     def get_batch_config(category: QuestionType) -> dict:
         """
         根據指定的題型，回傳一次完整的生成配置。
-        這可以讓外部的 batch_runner 直接拿到設定好的劇本。
         """
+
         config = {
             ToeicGenCol.CATEGORY: category.value,
             ToeicGenCol.THEME: MetaManager.get_random_theme()

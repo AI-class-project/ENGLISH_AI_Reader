@@ -7,7 +7,8 @@ from google.genai import types
 from google.genai.errors import APIError
 
 from core.const import OptionKey, ToeicGenCol, ToeicQuestionCol
-from core.security import KeyManager
+from core.llm.security import KeyManager
+from core.meta.toeic import QuestionType
 from tool.debug import dbg
 
 
@@ -35,14 +36,16 @@ class ToeicGenerator:
         """
         核心出題與動態格式派發方法 (全面 Enum 升級版)
         """
-        # 💡 1. 拔除魔法字串，改用 ToeicGenCol 獲取外部控制參數
+        # 1. 拔除魔法字串，改用 ToeicGenCol 獲取外部控制參數
         category = kwargs.get(ToeicGenCol.CATEGORY, "文法選擇")
         theme = kwargs.get(ToeicGenCol.THEME, "通用商務")
 
         # --------------------------------------------------
-        # 💡 2. 使用 f-string 與 ToeicQuestionCol 動態建構鏡像 JSON 合約
+        # 2. 使用 f-string 與 ToeicQuestionCol 動態建構鏡像 JSON 合約
         # --------------------------------------------------
-        if category in ["文法選擇", "單字克漏字"]:
+        categories_str = ", ".join(QuestionType.get_all_type())
+
+        if category in [QuestionType.GRAMMAR.value, QuestionType.VOCABULARY.value]:
             system_instruction = f"""
             你是一位專業的多益出題官方。請生成符合商務情境的全新【單選選擇題】。
 
@@ -51,7 +54,8 @@ class ToeicGenerator:
 
             【JSON 結構必須完全符合以下規格】
             {{
-              "{ToeicQuestionCol.CATEGORY}": "字串 (必須與要求的題型一致)",
+              "{ToeicQuestionCol.CATEGORY}": "字串 (必須從以下選項中嚴格擇一填入: {categories_str})",
+              "{ToeicQuestionCol.THEME}": "字串 (關於文章內容的情境標題)",
               "{ToeicQuestionCol.PASSAGES}": [],
               "{ToeicQuestionCol.QUESTIONS}": [
                 {{
@@ -72,7 +76,7 @@ class ToeicGenerator:
             user_prompt = f"請生成 1 個【{category}】題目，情境設定為【{theme}】。核心考點必須鎖定在：【{focus}】。"
             dbg.var(category=category, theme=theme, focus=focus)
 
-        elif category in ["單篇閱讀理解", "雙篇/多篇閱讀理解"]:
+        elif category in [QuestionType.READING_SINGLE.value, QuestionType.READING_MULTIPLE.value]:
             system_instruction = f"""
             你是一位專業的多益閱讀題組設計專家。請生成具備情境深度的【閱讀理解題組】。
 
@@ -81,7 +85,8 @@ class ToeicGenerator:
 
             【JSON 結構必須完全符合以下規格】
             {{
-              "{ToeicQuestionCol.CATEGORY}": "字串 (必須與要求的題型一致)",
+              "{ToeicQuestionCol.CATEGORY}": "字串 (必須從以下選項中嚴格擇一填入: {categories_str})",
+              "{ToeicQuestionCol.THEME}": "字串 (關於文章內容的情境標題)",
               "{ToeicQuestionCol.PASSAGES}": [
                 "字串 (第一篇文章內容)",
                 "字串 (第二篇文章內容，若為單篇則此陣列只有一個元素)"
@@ -102,7 +107,7 @@ class ToeicGenerator:
             }}
             """
             relation = kwargs.get(ToeicGenCol.READING_RELATION, "單篇商務公告信件")
-            sub_count = random.randint(4, 5) if "雙篇" in category or "多篇" in category else random.randint(2, 3)
+            sub_count = random.randint(4, 5) if QuestionType.READING_MULTIPLE.value in category else random.randint(2, 3)
 
             user_prompt = (
                 f"請生成 1 個【{category}】題組，情境設定為【{theme}】。\n"
@@ -142,7 +147,6 @@ class ToeicGenerator:
                     if "```" in raw_text:
                         raw_text = raw_text.replace("```json", "").replace("```", "").strip()
 
-                    # 💡 重大修正：現在我們要求的是單一 Object，所以要找大括號 `{` 和 `}`
                     start_idx = raw_text.find('{')
                     end_idx = raw_text.rfind('}')
                     if start_idx != -1 and end_idx != -1:
@@ -159,7 +163,7 @@ class ToeicGenerator:
 
                 except APIError as api_err:
                     if api_err.code == 429:
-                        dbg.war(f"🛑 [{model_name}] 金鑰 #{key_idx + 1} 限流 (429)，換 Key...")
+                        dbg.war(f"[{model_name}] 金鑰 #{key_idx + 1} 限流 (429)，換 Key...")
                         time.sleep(0.5)
                         continue
                     else:

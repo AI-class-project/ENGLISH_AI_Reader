@@ -1,0 +1,263 @@
+[
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "廠房公安與生產線維護 (Factory Safety & Maintenance)",
+    "passages": [
+      "[DOC 1] MEMORANDUM\nTo: All Production Staff\nFrom: Facilities Management\nDate: October 12\nSubject: Emergency Maintenance of Line 4\n\nPlease be advised that Production Line 4 will undergo mandatory safety inspections and emergency maintenance starting October 15 at 8:00 A.M. This is due to a recurring sensor malfunction that poses a risk to operator safety. The line will be completely shut down for 48 hours. Employees assigned to Line 4 are required to report to the supervisor’s office at 9:00 A.M. on the first day for temporary reassignment to the packaging department. All safety gear, including hard hats and steel-toed boots, must be worn at all times during the transition period. Failure to comply will result in disciplinary action.",
+      "[DOC 2] EMAIL\nFrom: Marcus Thorne <m.thorne@factory.com>\nTo: Facilities Management\nDate: October 13\nSubject: Re: Emergency Maintenance of Line 4\n\nDear Facilities Team,\nI am one of the operators currently assigned to Line 4. Regarding your memo from yesterday, I have a concern regarding the reassignment. My certification for operating the industrial packing machinery expired last month. I have already submitted my renewal application to HR, but I have not received the updated permit yet. Will I still be required to report to the packaging department, or should I be assigned to manual inventory sorting instead? I want to ensure I remain compliant with our safety regulations.\n\nBest regards,\nMarcus Thorne"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the shutdown of Production Line 4?",
+        "options": {
+          "A": "Scheduled annual maintenance",
+          "B": "A sensor issue that could endanger workers",
+          "C": "Low production output",
+          "D": "Upgrading to new machinery"
+        },
+        "answer": "B",
+        "explanation": "文中提到 due to a recurring sensor malfunction that poses a risk to operator safety，故選B。"
+      },
+      {
+        "question": "When is the maintenance on Line 4 expected to be completed?",
+        "options": {
+          "A": "October 15 at 8:00 A.M.",
+          "B": "October 16 at 9:00 A.M.",
+          "C": "October 17 at 8:00 A.M.",
+          "D": "October 18 at 9:00 A.M."
+        },
+        "answer": "C",
+        "explanation": "維護從 10/15 早上 8 點開始，為期 48 小時，因此結束時間為 10/17 早上 8 點。"
+      },
+      {
+        "question": "What are Line 4 employees expected to do on the first day of the shutdown?",
+        "options": {
+          "A": "Stay at home until the maintenance is finished",
+          "B": "Help with the maintenance of the sensors",
+          "C": "Attend a safety training session in the conference room",
+          "D": "Go to the supervisor’s office for new work assignments"
+        },
+        "answer": "D",
+        "explanation": "Memo 指出 employees are required to report to the supervisor’s office at 9:00 A.M. for temporary reassignment。"
+      },
+      {
+        "question": "Why did Marcus Thorne write the email?",
+        "options": {
+          "A": "To request an extension on his certification renewal",
+          "B": "To clarify his temporary duty status due to a certification issue",
+          "C": "To complain about the safety gear requirements",
+          "D": "To report a new malfunction on the packaging line"
+        },
+        "answer": "B",
+        "explanation": "Marcus 詢問因為證照過期，是否仍應被分配到包裝部門，故選B。"
+      },
+      {
+        "question": "What can be inferred about the factory's safety policy?",
+        "options": {
+          "A": "Employees are allowed to operate machinery without current permits",
+          "B": "Safety gear is optional during maintenance periods",
+          "C": "Strict adherence to safety protocols is mandatory",
+          "D": "The packaging department has the lowest safety standards"
+        },
+        "answer": "C",
+        "explanation": "Memo 中提到 failure to comply with safety gear rules will result in disciplinary action，顯示公司對安全規範執行嚴格。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "跨部門電子郵件溝通",
+    "passages": [
+      "Subject: Update on Q3 Marketing Campaign Collaboration\n\nDear Team,\n\nI am writing to provide an update regarding the upcoming Q3 promotional campaign. Due to the recent server maintenance scheduled for the IT department, the launch of our digital advertising platform will be delayed by three days. Consequently, the Marketing department will need to adjust the deadline for the final creative assets submission.\n\nOriginally, all graphics and copy were due by this Friday. However, we are extending the deadline to next Tuesday, October 15th, at 5:00 PM. Please ensure that all files are uploaded to the shared server folder labeled 'Q3_Campaign_Assets' by this time. If your team anticipates any difficulty in meeting this revised schedule, please notify me directly by the end of the business day tomorrow.\n\nThank you for your flexibility and continued hard work.\n\nBest regards,\n\nSarah Jenkins\nMarketing Manager"
+    ],
+    "questions": [
+      {
+        "question": "Why is the deadline for the creative assets being extended?",
+        "options": {
+          "A": "The Marketing team needs more time to brainstorm ideas.",
+          "B": "The IT department is performing server maintenance.",
+          "C": "The server folder is currently experiencing technical errors.",
+          "D": "Sarah Jenkins is unavailable to review the materials this week."
+        },
+        "answer": "B",
+        "explanation": "信件中提到，由於 IT 部門安排的伺服器維護，數位廣告平台的上線時間延後，因此行銷部門也隨之調整了素材提交期限。"
+      },
+      {
+        "question": "What are employees instructed to do if they cannot meet the new deadline?",
+        "options": {
+          "A": "Contact the IT department for technical support.",
+          "B": "Upload the incomplete files to the shared folder.",
+          "C": "Inform Sarah Jenkins by the end of the day tomorrow.",
+          "D": "Submit the assets by Friday as originally planned."
+        },
+        "answer": "C",
+        "explanation": "信件最後一段提到，若預計無法達成新的期限，請在明天工作日結束前直接通知 Sarah Jenkins。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "產品發表與行銷企劃",
+    "passages": [
+      "Our marketing team is currently finalizing the promotional strategy for the upcoming laptop release. We are confident that the new design will ______ the needs of our target demographic, as it combines high performance with an accessible price point."
+    ],
+    "questions": [
+      {
+        "question": "Our marketing team is currently finalizing the promotional strategy for the upcoming laptop release. We are confident that the new design will ______ the needs of our target demographic, as it combines high performance with an accessible price point.",
+        "options": {
+          "A": "address",
+          "B": "accumulate",
+          "C": "alleviate",
+          "D": "advocate"
+        },
+        "answer": "A",
+        "explanation": "答案為 (A)。address 在商務情境中常指「處理、應對、解決（問題或需求）」。句意為：我們深信新設計將能滿足（處理）我們目標客群的需求。其他選項：(B) 累積、(C) 減輕（痛苦或負擔）、(D) 提倡，皆不符合語意。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "採購合約與供應商談判",
+    "passages": [
+      "After several rounds of intense negotiations, the procurement department finally reached a consensus with the vendor regarding the delivery schedule. To ensure that both parties adhere to the agreed-upon standards, they decided to ______ the new terms into the existing master service agreement."
+    ],
+    "questions": [
+      {
+        "question": "After several rounds of intense negotiations, the procurement department finally reached a consensus with the vendor regarding the delivery schedule. To ensure that both parties adhere to the agreed-upon standards, they decided to ______ the new terms into the existing master service agreement.",
+        "options": {
+          "A": "incorporate",
+          "B": "terminate",
+          "C": "fluctuate",
+          "D": "withdraw"
+        },
+        "answer": "A",
+        "explanation": "本題考查商務合約情境動詞。incorporate (將...納入/合併) 符合語境，意指將新條款納入既有合約中。terminate 是終止，fluctuate 是波動，withdraw 是撤回，皆不符合語意。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "公司財務報表與預算會議",
+    "passages": [
+      "During the quarterly budget review meeting, the CFO emphasized that all department heads must strictly adhere to the _______ allocation of funds to ensure the company remains profitable throughout the fiscal year."
+    ],
+    "questions": [
+      {
+        "question": "During the quarterly budget review meeting, the CFO emphasized that all department heads must strictly adhere to the _______ allocation of funds to ensure the company remains profitable throughout the fiscal year.",
+        "options": {
+          "A": "designated",
+          "B": "versatile",
+          "C": "provisional",
+          "D": "negligent"
+        },
+        "answer": "A",
+        "explanation": "本題考查形容詞辨析。designated 為「指定的、已分配的」，符合語境中指預算分配的正確性。versatile 意為「多才多藝的」；provisional 意為「臨時的」；negligent 意為「疏忽的」。故選 A。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "產品發表與行銷企劃",
+    "passages": [
+      "The marketing team has decided to ______ the official launch date of the new smartphone series by two weeks to ensure all promotional materials are fully localized for the international market."
+    ],
+    "questions": [
+      {
+        "question": "The marketing team has decided to ______ the official launch date of the new smartphone series by two weeks to ensure all promotional materials are fully localized for the international market.",
+        "options": {
+          "A": "postpone",
+          "B": "terminate",
+          "C": "accelerate",
+          "D": "abandon"
+        },
+        "answer": "A",
+        "explanation": "本題考查商務情境中的動詞辨析。根據句意，為了確保行銷素材在地化，團隊決定將發表日期「延後」兩週。postpone 為「延後」之意，符合邏輯；terminate 為終止，accelerate 為加速，abandon 為放棄，皆不符合語境。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "廠房公安與生產線維護",
+    "passages": [
+      "To: All Production Staff\nFrom: Marcus Thorne, Plant Manager\nDate: October 12\nSubject: Urgent: Scheduled Maintenance and Safety Protocol Update\n\nThis is to inform all personnel that the main assembly line (Line 4) will be shut down for mandatory maintenance from October 18th to October 20th. During this period, our technical team will be replacing the hydraulic sensors to ensure compliance with the new regional safety standards. \n\nAll staff assigned to Line 4 are required to attend a mandatory safety briefing on October 17th at 9:00 AM in the Training Center. Please be advised that the use of personal protective equipment (PPE), specifically the upgraded heat-resistant gloves, will be strictly enforced upon the line's reopening. Failure to comply with these updated protocols will result in immediate disciplinary action. We appreciate your cooperation in maintaining a safe work environment."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the shutdown of Line 4?",
+        "options": {
+          "A": "To conduct a general inspection of the Training Center.",
+          "B": "To install new equipment to meet safety regulations.",
+          "C": "To train new employees on assembly techniques.",
+          "D": "To resolve a recurring issue with the cooling system."
+        },
+        "answer": "B",
+        "explanation": "文中提到維護是為了更換液壓感測器（replacing the hydraulic sensors）以確保符合新的區域安全標準（compliance with the new regional safety standards），故選B。"
+      },
+      {
+        "question": "What are employees required to do on October 17th?",
+        "options": {
+          "A": "Report to the maintenance team for equipment testing.",
+          "B": "Purchase new heat-resistant gloves from the office.",
+          "C": "Attend a compulsory safety meeting.",
+          "D": "Complete a performance evaluation form."
+        },
+        "answer": "C",
+        "explanation": "信件中明確指出，所有被分配到 Line 4 的員工必須在 10 月 17 日上午 9 點參加強制性的安全說明會（mandatory safety briefing），故選C。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "產品發表與行銷企劃",
+    "passages": [
+      "[DOC 1] New Tech Innovations Product Launch Schedule: October 15th\n09:00 AM - 10:00 AM: Keynote Speech by CEO Sarah Jenkins\n10:30 AM - 12:00 PM: Live Product Demonstration (Main Stage)\n12:00 PM - 01:30 PM: Networking Lunch (Grand Ballroom)\n02:00 PM - 03:30 PM: Breakout Sessions: Marketing Strategy & Global Distribution\n04:00 PM - 05:00 PM: Closing Remarks and Q&A",
+      "[DOC 2] Memo: Urgent Schedule Update\nTo: All Marketing Staff\nFrom: Event Planning Committee\nSubject: Changes to October 15th Agenda\nDue to an unforeseen flight delay affecting our keynote speaker, Sarah Jenkins, we have adjusted the schedule. The Keynote Speech will now take place from 01:30 PM to 02:30 PM, following the lunch. Consequently, the afternoon breakout sessions have been canceled to allow for more time during the Q&A session, which will now start at 02:45 PM. Please ensure all marketing materials are updated to reflect these changes before the event starts."
+    ],
+    "questions": [
+      {
+        "question": "According to the original schedule in DOC 1, what was supposed to happen immediately after the lunch break?",
+        "options": {
+          "A": "Keynote Speech",
+          "B": "Live Product Demonstration",
+          "C": "Breakout Sessions",
+          "D": "Closing Remarks"
+        },
+        "answer": "C",
+        "explanation": "根據 DOC 1，午餐後（12:00 PM - 01:30 PM）的下一個行程是 02:00 PM 開始的 Breakout Sessions。"
+      },
+      {
+        "question": "What is the primary reason for the schedule adjustment mentioned in DOC 2?",
+        "options": {
+          "A": "The venue was double-booked.",
+          "B": "The CEO's flight was delayed.",
+          "C": "Low registration for the breakout sessions.",
+          "D": "The marketing materials were not ready."
+        },
+        "answer": "B",
+        "explanation": "DOC 2 明確指出調整行程的原因是 Sarah Jenkins 的班機延誤。"
+      },
+      {
+        "question": "Which activity has been removed from the schedule entirely?",
+        "options": {
+          "A": "The Keynote Speech",
+          "B": "The Networking Lunch",
+          "C": "The Breakout Sessions",
+          "D": "The Live Product Demonstration"
+        },
+        "answer": "C",
+        "explanation": "DOC 2 提到下午的分組會議（Breakout Sessions）已被取消以騰出時間。"
+      },
+      {
+        "question": "What time will the Q&A session start following the revised schedule?",
+        "options": {
+          "A": "01:30 PM",
+          "B": "02:30 PM",
+          "C": "02:45 PM",
+          "D": "04:00 PM"
+        },
+        "answer": "C",
+        "explanation": "DOC 2 指出 Q&A 環節將會在 02:45 PM 開始。"
+      }
+    ]
+  }
+]

@@ -1,11 +1,13 @@
 import dataclasses
 import hashlib
 import json
+import os
 import time
 
 from core.const import ToeicGenCol
-from core.generator import ToeicGenerator, ToeicQuestionCol
-from core.models import ToeicQuestionModel
+from core.engine.config import GENERATE_BATCH_CONFIG
+from core.engine.models import ToeicQuestionModel
+from core.llm.generator import ToeicGenerator, ToeicQuestionCol
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -16,13 +18,11 @@ class ToeicBatchRunner:
     def __init__(self):
         self.generator = ToeicGenerator()
         self.output_dir = PathConfig.TOEIC_POOL
-        self.max_attempts_ratio: float = 2.0
 
     def generate_batch(self, count: int, config: dict) -> list[ToeicQuestionModel]:
         """
         批次生成特定題型，並在第一時間將其轉換為 UI 友善的強型別巢狀物件 (ToeicQuestionModel)
         """
-        # ✅ 升級 1：使用 ToeicGenCol 安全獲取外部控制引數
         category = config.get(ToeicGenCol.CATEGORY.value, "未定義題型")
         theme = config.get(ToeicGenCol.THEME.value, "通用商務")
         dbg.log(f"開始批次生產任務：【{category}】預計目標總數：{count} 題組，情境：{theme}")
@@ -31,7 +31,7 @@ class ToeicBatchRunner:
         existing_fingerprints = set()
 
         attempt = 0
-        max_attempts = int(count * self.max_attempts_ratio)
+        max_attempts = int(count * GENERATE_BATCH_CONFIG.ATTEMPTS_RATIO_MAX)
 
         while len(generated_list) < count and attempt < max_attempts:
             attempt += 1
@@ -44,16 +44,14 @@ class ToeicBatchRunner:
                 dbg.war("該次嘗試未取得有效資料，跳過。")
                 continue
 
-            # ✅ 升級 2：全面使用 ToeicQuestionCol 提取內層資料，消滅裸露的 "passages" 與 "questions" 字串
             raw_passages = questions_chunk.get(ToeicQuestionCol.PASSAGES.value, [])
             raw_questions = questions_chunk.get(ToeicQuestionCol.QUESTIONS.value, [])
 
             # 擷取第一篇文章的前 20 個字元作為文章指紋前綴
-            passage_prefix = raw_passages[0][:20] if raw_passages else ""
+            passage_prefix = raw_passages[0][:GENERATE_BATCH_CONFIG.PASSAGE_PREFIX_MAX] if raw_passages else ""
 
             valid_questions = []
             for q in raw_questions:
-                # ✅ 升級 3：使用 ToeicQuestionCol 安全提取子題目欄位 "question"
                 q_text = q.get(ToeicQuestionCol.QUESTION.value, "").strip()
                 if not q_text:
                     continue
@@ -70,15 +68,12 @@ class ToeicBatchRunner:
                 valid_questions.append(q)
 
             # 如果這一組所有的子題目都被重置濾光了，則放棄本組
-            if not valid_questions:
-                continue
+            if not valid_questions: continue
 
             # 將通過去重的子題目重新塞回大物件中
             questions_chunk[ToeicQuestionCol.QUESTIONS.value] = valid_questions
 
-            # 💡 3. 將過濾完的強型別巢狀字典，完美還原封裝成高階物件
             try:
-                # 這裡調用模型更新後的 from_ai_dict 轉換器
                 question_model = ToeicQuestionModel.from_ai_dict(questions_chunk)
                 generated_list.append(question_model)
                 dbg.var(current_pool_size=len(generated_list))
@@ -87,18 +82,33 @@ class ToeicBatchRunner:
 
             time.sleep(1.2)
 
-        dbg.log(f"🏁 批次生產結束！成功產出 {len(generated_list)} 個題組（總嘗試次數: {attempt}）")
+        dbg.log(f"批次生產結束！成功產出 {len(generated_list)} 個題組（總嘗試次數: {attempt}）")
         return generated_list[:count]
 
     def save_to_json(self, data: list[ToeicQuestionModel]):
-        """將高階巢狀物件清單，完美序列化為 JSON 存檔"""
+        """將高階巢狀物件清單，完美序列化並附加 (Append) 到 JSON 存檔中"""
         try:
-            # 🚀 利用 dataclasses.asdict 一鍵將整個巢狀物件拆解回 dict，準備寫入 JSON
-            serialized_data = [dataclasses.asdict(m) for m in data]
+            new_serialized_data = [dataclasses.asdict(m) for m in data]
 
+            existing_data = []
+
+            file_exists = self.output_dir.exists() if hasattr(self.output_dir, "exists") else os.path.exists(self.output_dir)
+
+            if file_exists:
+                with open(self.output_dir, "r", encoding="utf-8") as f:
+                    try:
+                        existing_data = json.load(f)
+                    except json.JSONDecodeError:
+                        dbg.war("⚠️ 舊 JSON 檔案為空或格式損毀，系統將重新建立題庫。")
+
+            # 將新資料合併到舊資料池中
+            combined_data = existing_data + new_serialized_data
+
+            # 將合併後的完整大陣列，重新覆蓋寫入檔案
             with open(self.output_dir, "w", encoding="utf-8") as f:
-                json.dump(serialized_data, f, ensure_ascii=False, indent=2)
+                json.dump(combined_data, f, ensure_ascii=False, indent=2)
 
-            dbg.log(f"💾 【結構化巢狀題庫匯出成功】檔案已成功寫入至: {self.output_dir}")
+            dbg.log(f"💾 【題庫累積匯出成功】本次新增 {len(data)} 組，題庫總計: {len(combined_data)} 組。")
+
         except Exception as e:
             dbg.error(f"❌ 寫入 JSON 題庫檔案失敗: {e}")

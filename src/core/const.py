@@ -11,6 +11,7 @@ class ToeicGenCol(StrEnum):
 class ToeicQuestionCol(StrEnum):
     """【輸出端】AI 生成 JSON 與 DTO 物件欄位專用 Key"""
     CATEGORY = "category"
+    THEME = "theme"
     PASSAGES = "passages"
     QUESTIONS = "questions"
     QUESTION = "question"
