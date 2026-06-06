@@ -1,18 +1,28 @@
 {
+  "辦公室日常與人事公告 (Office & HR Announcement)": [
+    "An internal memo announces the closure of several retail locations due to economic challenges."
+  ],
+  "國際商務出差與行程安排 (Business Travel & Itinerary)": [
+    "Executives prepare for a crucial meeting with government officials regarding AI investments."
+  ],
   "廠房公安與生產線維護 (Factory Safety & Maintenance)": [
-    "Denby pottery ends production, firing its final pieces after a proud history."
+    "New methods are being implemented to repurpose food processing byproducts efficiently."
+  ],
+  "跨部門電子郵件溝通 (Interdepartmental Email Communication)": [
+    "A memo warns about uncontrolled AI development needing immediate internal policy review."
   ],
   "產品發表與行銷企劃 (Product Launch & Marketing Campaign)": [
-    "An AI co-founder warns about AI developing autonomously without human control.",
-    "Fermentation is making food processing byproducts useful and valuable, reducing waste.",
-    "Hinge boss suggests AI helps young adults initiate contact on dating apps due to loneliness."
+    "A new investment opportunity for individual investors is being launched next week.",
+    "A product development team discusses integrating AI features to enhance user engagement."
   ],
   "公司財務報表與預算會議 (Financial Reports & Budget Planning)": [
-    "The US president plans to meet AI leaders to discuss investment in their companies.",
-    "US stocks slump, with Nasdaq seeing a significant daily fall due to Big Tech fears.",
-    "Individual investors can soon buy shares in Elon Musk's SpaceX company.",
-    "US hospitality jobs are booming for the third month, driven by World Cup preparations.",
-    "US markets hit record highs, fueled by AI, raising concerns about a potential stock bubble.",
-    "British Heart Foundation plans to close 150 shops due to a challenging trading environment."
+    "The latest financial report indicates a significant market downturn affecting company investments.",
+    "An urgent financial report analyzes the potential risks of an AI-driven market bubble."
+  ],
+  "餐飲宴會與商務社交日常 (Catering, Banquets & Corporate Socials)": [
+    "Hospitality sector sees a hiring surge in preparation for upcoming international events."
+  ],
+  "物流倉儲與交通異動通知 (Logistics, Warehousing & Transit Updates)": [
+    "Logistics teams finalize inventory and shipping as a long-standing production line closes."
   ]
 }

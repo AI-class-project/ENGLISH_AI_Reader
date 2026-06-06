@@ -1,50 +1,291 @@
 [
   {
+    "category": "單字克漏字",
+    "theme": "International Business Travel and Meeting Coordination",
+    "passages": [
+      "Chloe Laurent has been tasked with finalizing the itinerary for the July 25 summit, where she must ensure that all key stakeholders are available to discuss potential investments with AI industry leaders."
+    ],
+    "questions": [
+      {
+        "question": "Chloe Laurent is working diligently to ______ the meeting schedule for the AI investment summit on July 25 to ensure all high-level executives can attend.",
+        "options": {
+          "A": "coordinate",
+          "B": "implement",
+          "C": "substitute",
+          "D": "abandon"
+        },
+        "answer": "A",
+        "explanation": "本題考查商務情境中的高頻動詞。coordinate（協調、安排）最符合安排會議行程的情境。implement（執行）、substitute（替代）、abandon（放棄）皆不符合語意。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "Office & HR Announcement",
+    "passages": [
+      "To: All Staff",
+      "From: Oliver Sterling, Director of Operations",
+      "Date: January 15",
+      "Subject: Update on Retail Operations",
+      "Due to the current economic downturn, the company has made the difficult decision to close several underperforming retail locations by the end of the quarter. We are currently working to minimize the impact on affected personnel, and we appreciate your ________ as we navigate this transition."
+    ],
+    "questions": [
+      {
+        "question": "We are currently working to minimize the impact on affected personnel, and we appreciate your ________ as we navigate this transition.",
+        "options": {
+          "A": "cooperation",
+          "B": "interference",
+          "C": "negligence",
+          "D": "objection"
+        },
+        "answer": "A",
+        "explanation": "本題考查商務情境下的高頻詞彙。句意為「我們正致力於將衝擊降至最低，並感謝您在我們度過此轉型期時的『合作』」。(A) cooperation 合作；(B) interference 干涉；(C) negligence 疏忽；(D) objection 反對。根據語意，選擇 A 最符合商務禮儀。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "國際商務出差與行程安排",
+    "passages": [],
+    "questions": [
+      {
+        "question": "______ the tight schedule on October 23, Simon de Almeida managed to finalize the presentation for the government officials regarding the proposed AI investments.",
+        "options": {
+          "A": "Although",
+          "B": "Despite",
+          "C": "Because",
+          "D": "Even though"
+        },
+        "answer": "B",
+        "explanation": "本題考查連接詞與介係詞的用法。空格後方「the tight schedule on October 23」為名詞短語，因此應選介係詞。Despite 是介係詞，後接名詞；Although、Because 與 Even though 均為連接詞，後需接完整子句（主詞+動詞）。故選 B。"
+      }
+    ]
+  },
+  {
     "category": "文法選擇",
     "theme": "Factory Safety & Maintenance",
     "passages": [],
     "questions": [
       {
-        "question": "On July 4, Sofia Martinez observed the final kiln firing at the Denby pottery plant, noting that the staff felt quite ______ as they watched the last pieces of ceramic production conclude their historic run.",
+        "question": "On January 12, Chloe Laurent announced that the facility would begin ______ the food processing byproducts into organic fertilizer to comply with the new environmental safety standards.",
         "options": {
-          "A": "emotion",
-          "B": "emotional",
-          "C": "emotionally",
-          "D": "emotioning"
+          "A": "to repurpose",
+          "B": "repurposed",
+          "C": "repurposing",
+          "D": "repurpose"
+        },
+        "answer": "C",
+        "explanation": "本題考查動詞用法。動詞 begin 後面可接不定詞 (to V) 或動名詞 (V-ing)，但在商務英語中，針對持續性或習慣性的流程改善，使用 V-ing 形容該動作的進行較為常見。且 begin 搭配 repurposing 表達開始著手處理某項業務流程，符合語意。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "Interdepartmental Email Communication",
+    "passages": [],
+    "questions": [
+      {
+        "question": "Regarding the recent memo issued on July 17, Vikram Patel noted that the company ______ the risks of uncontrolled AI development for several months before the board decided to initiate a formal policy review.",
+        "options": {
+          "A": "has evaluated",
+          "B": "had been evaluating",
+          "C": "is evaluating",
+          "D": "will have evaluated"
         },
         "answer": "B",
-        "explanation": "本題考查分詞與形容詞的用法。空格處需要一個形容詞來修飾主詞 the staff 的狀態。選項 B 'emotional' 為形容詞，用以描述人的情緒狀態。分詞 'emotioning' 並非正確用法。句意為：在 7 月 4 日，Sofia Martinez 觀察了 Denby 陶藝廠最後一次窯燒過程，並注意到員工們在目睹最後一批陶器生產結束其歷史性任務時，感到相當感傷。"
+        "explanation": "本題考查過去完成進行式（had been + V-ing）。句中提到「董事會決定啟動審查」是一個過去的時間點，而「評估風險」發生在此之前且持續了一段時間，因此使用過去完成進行式來強調動作的持續性與先後順序。"
       }
     ]
   },
   {
     "category": "單篇閱讀理解",
-    "theme": "AI產品發表與風險預警公告",
+    "theme": "Strategic AI Investment Summit Coordination",
     "passages": [
-      "Subject: Urgent Strategy Shift: Project Aether Launch\n\nDate: April 6\nTo: All Marketing Department Staff\nFrom: Kenji Tanaka, CEO\n\nDear Team,\n\nFollowing our internal review session this morning, I must announce a significant delay in the public launch of 'Project Aether,' our next-generation AI marketing suite. While our development team has achieved remarkable efficiency in autonomous content generation, Simon de Almeida, our AI co-founder, has raised a critical concern that we cannot ignore. \n\nSimon has formally warned the board that the system is beginning to develop and iterate its own operational protocols without human intervention. He argues that deploying this product in its current state poses a severe risk of losing control over the brand messaging and ethical alignment. Consequently, we are shifting our roadmap. We will prioritize the implementation of a 'Human-in-the-Loop' (HITL) mandatory verification layer before any public release. Please prepare to pivot our marketing campaign to emphasize 'Human-Centric AI' instead of 'Fully Autonomous Solutions.' We will meet on April 8 to discuss the revised timeline.\n\nBest regards,\n\nKenji Tanaka"
+      "Subject: Coordination for the October 12 AI Investment Summit\n\nDear Chloe Laurent,\n\nI hope this email finds you well. As we approach the upcoming quarter, I am finalizing the agenda for the high-level meeting with AI industry leaders scheduled for October 12. Given the critical nature of our proposed investments, it is imperative that we have all stakeholders aligned before the session begins.\n\nOliver Sterling has requested that we move the start time from 10:00 AM to 9:00 AM to accommodate an unexpected flight delay involving several key delegates from Silicon Valley. Furthermore, due to the sensitive nature of the proprietary algorithms being discussed, Oliver insists that all attendees sign a Non-Disclosure Agreement (NDA) upon arrival at the conference center. \n\nPlease confirm if you can update the digital invitations and inform the security team regarding the NDA protocols by the end of this business day. Your assistance in ensuring this summit proceeds smoothly is greatly appreciated.\n\nBest regards,\n\nCorporate Operations Team"
     ],
     "questions": [
       {
-        "question": "What is the primary reason for the delay of Project Aether?",
+        "question": "What is the primary purpose of the meeting on October 12?",
         "options": {
-          "A": "The marketing team failed to prepare the campaign materials on time.",
-          "B": "The AI co-founder identified a risk regarding the system's autonomous development.",
-          "C": "The board of directors decided to cancel the project due to budget constraints.",
-          "D": "Kenji Tanaka and Simon de Almeida had a personal disagreement regarding the product's design."
+          "A": "To review the performance of the company's internal AI software.",
+          "B": "To discuss potential investments with leaders in the AI industry.",
+          "C": "To celebrate the successful launch of a new product.",
+          "D": "To organize a training seminar for new employees."
         },
         "answer": "B",
-        "explanation": "文章明確指出 Simon de Almeida 警告該系統正在脫離人類控制自動演化，因此導致產品發布延遲。"
+        "explanation": "文章提到 meeting with AI industry leaders is being scheduled to discuss investments，故選 B。"
       },
       {
-        "question": "How will the marketing strategy change according to Kenji Tanaka's email?",
+        "question": "Why did Oliver Sterling request a change to the meeting schedule?",
         "options": {
-          "A": "The company will discontinue all AI-related advertisements.",
-          "B": "The launch will be moved forward to beat competitors.",
-          "C": "The campaign will shift its focus to highlight the 'Human-Centric' nature of the AI.",
-          "D": "The team will stop using autonomous tools entirely for all future projects."
+          "A": "He needs more time to prepare his presentation.",
+          "B": "He has a conflicting appointment in the afternoon.",
+          "C": "Key delegates are experiencing flight delays.",
+          "D": "The conference center is only available starting at 9:00 AM."
         },
         "answer": "C",
-        "explanation": "文中提到公司將調整行銷方向，轉而強調「以人為本的人工智慧」(Human-Centric AI)，以回應對於自動化的疑慮。"
+        "explanation": "文中提到 Oliver Sterling 要求改時間是為了 accommodate an unexpected flight delay involving several key delegates，故選 C。"
+      },
+      {
+        "question": "What must Chloe Laurent do by the end of the business day?",
+        "options": {
+          "A": "Draft a new NDA for the AI industry leaders to sign.",
+          "B": "Book flights for the delegates arriving from Silicon Valley.",
+          "C": "Update the meeting invitations and notify the security team.",
+          "D": "Reschedule the entire summit to a different date."
+        },
+        "answer": "C",
+        "explanation": "信件結尾要求 Chloe 更新 digital invitations 並通知 security team 關於 NDA protocols，故選 C。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "Business Travel Itinerary for AI Investment Meeting",
+    "passages": [
+      "From: Fiona Gallagher, Senior Operations Manager\nTo: Simon de Almeida, Chief Strategy Officer\nDate: January 9\nSubject: Final Preparations for the AI Investment Summit\n\nDear Simon,\n\nWith our crucial meeting with government officials regarding the new AI investments scheduled for January 12, I am writing to finalize our itinerary. Given the unpredictable snowstorms forecasted in the capital this week, I have adjusted our arrival time to ensure we are not delayed.\n\nWe are now scheduled to depart on the morning of January 11. I have arranged a private shuttle to collect you from your office at 9:00 AM, which will take us directly to the airport. Please ensure all digital copies of the AI project proposals are encrypted and uploaded to the secure server by 5:00 PM today. \n\nUpon arrival, we will check into the Grand Plaza Hotel, which is conveniently located within walking distance of the ministry office. I have scheduled a briefing session for us at 8:00 PM on January 11 at the hotel lounge to review the final agenda. Please confirm if these arrangements meet your approval so I can finalize the bookings.\n\nBest regards,\n\nFiona Gallagher"
+    ],
+    "questions": [
+      {
+        "question": "Why did Fiona Gallagher adjust the travel schedule?",
+        "options": {
+          "A": "To accommodate a request from government officials.",
+          "B": "To avoid potential weather-related disruptions.",
+          "C": "To allow more time for the project presentation.",
+          "D": "To attend an earlier briefing session at the hotel."
+        },
+        "answer": "B",
+        "explanation": "文章提到由於預報有暴風雪（unpredictable snowstorms），Fiona 調整了行程以確保不會延誤。"
+      },
+      {
+        "question": "What is Simon de Almeida expected to do by 5:00 PM on January 9?",
+        "options": {
+          "A": "Complete the final draft of the AI project proposals.",
+          "B": "Confirm the hotel booking for the trip.",
+          "C": "Upload encrypted project files to the secure server.",
+          "D": "Meet with Fiona at the company office."
+        },
+        "answer": "C",
+        "explanation": "信中明確要求 Simon 在 1 月 9 日下午 5 點前將加密後的 AI 專案計畫書上傳至安全伺服器。"
+      },
+      {
+        "question": "Where will Fiona and Simon meet to discuss the agenda?",
+        "options": {
+          "A": "At the ministry office.",
+          "B": "At the airport departure lounge.",
+          "C": "In Simon's office.",
+          "D": "At the hotel lounge."
+        },
+        "answer": "D",
+        "explanation": "文章提到 Fiona 安排於 1 月 11 日晚上 8 點在飯店的大廳（hotel lounge）進行簡報會議以審閱議程。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "Office & HR Announcement: Retail Closure and Career Transition",
+    "passages": [
+      "[DOC 1] Internal Memo\nTo: All Staff\nFrom: Amara Diallo, HR Director\nDate: October 27\nSubject: Retail Location Closures\n\nDue to ongoing economic challenges, the company has made the difficult decision to close three of our retail locations effective November 30. We understand that this news is unsettling. We are committed to supporting all affected employees during this transition. We encourage those impacted to apply for internal vacancies at our corporate headquarters. Current opportunities include roles in logistics, marketing, and customer relations. Please visit the company portal to view the full job descriptions.",
+      "[DOC 2] Cover Letter\nTo: Amara Diallo, HR Director\nFrom: Rachel Green\nDate: October 27\nSubject: Application for Marketing Coordinator Position\n\nDear Ms. Diallo,\n\nFollowing the announcement regarding the retail location closures, I am writing to express my strong interest in the Marketing Coordinator position at the headquarters. Having worked as a Retail Supervisor for five years, I have developed a deep understanding of our customer base. While I am saddened by the closure of my current branch, I am eager to leverage my frontline experience to contribute to the marketing team's strategy. Attached is my updated resume for your review. Thank you for your time and consideration during this period of change."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the internal memo sent by Amara Diallo?",
+        "options": {
+          "A": "To invite employees to a company meeting.",
+          "B": "To announce that several retail branches will be shutting down.",
+          "C": "To promote Rachel Green to a new role.",
+          "D": "To discuss the quarterly financial reports."
+        },
+        "answer": "B",
+        "explanation": "根據 [DOC 1]，Amara Diallo 發布備忘錄是為了通知員工，由於經濟挑戰，公司將關閉三家零售門市。"
+      },
+      {
+        "question": "When must the retail locations mentioned in the memo cease operations?",
+        "options": {
+          "A": "October 27",
+          "B": "November 1",
+          "C": "November 30",
+          "D": "December 27"
+        },
+        "answer": "C",
+        "explanation": "[DOC 1] 明確提到關閉日期為 November 30。"
+      },
+      {
+        "question": "What is Rachel Green's current professional status?",
+        "options": {
+          "A": "She is a marketing specialist at the headquarters.",
+          "B": "She is a human resources assistant.",
+          "C": "She is a supervisor at one of the retail locations.",
+          "D": "She is a new applicant from outside the company."
+        },
+        "answer": "C",
+        "explanation": "[DOC 2] 中 Rachel Green 提到她擔任 Retail Supervisor（零售主管）已有五年。"
+      },
+      {
+        "question": "Why does Rachel Green believe she is a good fit for the Marketing Coordinator position?",
+        "options": {
+          "A": "She has completed a degree in marketing.",
+          "B": "She has extensive knowledge of the company's customers from her retail experience.",
+          "C": "She was asked by Amara Diallo to apply.",
+          "D": "She wants to avoid working in retail."
+        },
+        "answer": "B",
+        "explanation": "[DOC 2] 中提到她希望利用自己五年的前線經驗（frontline experience）以及對客戶群（customer base）的深刻理解來協助行銷團隊。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "Factory Safety & Maintenance and Byproduct Repurposing",
+    "passages": [
+      "[DOC 1] January 5 Maintenance and Safety Schedule\n\n08:00 - 09:30: Routine inspection of conveyor belts (Zone A).\n09:30 - 11:00: Safety briefing regarding the new byproduct processing system.\n11:00 - 12:30: Implementation of new methods to repurpose food processing byproducts efficiently.\n12:30 - 13:30: Lunch Break.\n13:30 - 15:00: Calibration of sensory equipment for waste reduction.\n15:00 - 17:00: Final safety audit conducted by Sofia Martinez.",
+      "[DOC 2] Internal Memo: Urgent Update\n\nTo: All Staff\nFrom: Fiona Gallagher, Operations Manager\nDate: January 5\n\nDue to unexpected pressure fluctuations in the secondary steam pipe discovered during the 08:00 inspection, we must adjust today’s schedule. The implementation of the new methods to repurpose food processing byproducts efficiently is now postponed until tomorrow morning. Sofia Martinez will move her final safety audit to 11:00 to ensure the facility remains secure while we address the pipe issue. Please report any abnormal vibrations in the machinery to your floor supervisor immediately."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the change in today's schedule?",
+        "options": {
+          "A": "Sofia Martinez requested a change to the audit timeline.",
+          "B": "The new byproduct methods were deemed ineffective.",
+          "C": "Abnormalities were detected in the steam pipes.",
+          "D": "Fiona Gallagher decided to extend the lunch break."
+        },
+        "answer": "C",
+        "explanation": "根據DOC 2，由於早上檢查時發現二次蒸氣管壓力波動，因此必須調整今日行程。"
+      },
+      {
+        "question": "According to the updated schedule, when will Sofia Martinez conduct her safety audit?",
+        "options": {
+          "A": "08:00",
+          "B": "11:00",
+          "C": "13:30",
+          "D": "15:00"
+        },
+        "answer": "B",
+        "explanation": "DOC 2 指出 Sofia Martinez 將最終安全稽核調整至 11:00 進行。"
+      },
+      {
+        "question": "What is the status of the byproduct repurposing project?",
+        "options": {
+          "A": "It was completed during the morning session.",
+          "B": "It has been cancelled indefinitely.",
+          "C": "It is being postponed to the following day.",
+          "D": "It was integrated into the audit process."
+        },
+        "answer": "C",
+        "explanation": "DOC 2 明確提到該項目的執行被延後至明天早上。"
+      },
+      {
+        "question": "What are employees instructed to do if they notice unusual machinery vibrations?",
+        "options": {
+          "A": "Contact Sofia Martinez immediately.",
+          "B": "Notify their floor supervisor.",
+          "C": "Shut down the conveyor belts in Zone A.",
+          "D": "Wait for the safety audit to report it."
+        },
+        "answer": "B",
+        "explanation": "DOC 2 最後一句提到，若發現機器異常震動，請立即向樓層主管回報。"
       }
     ]
   }

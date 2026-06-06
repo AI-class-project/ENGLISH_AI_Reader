@@ -105,44 +105,90 @@ class MetaManager:
         return ToeicMetaPool.THEME_MATRIX
 
     @staticmethod
-    def get_random_theme() -> str:
-        """隨機抽取一個商務情境 """
-        matrix = MetaManager._get_active_theme_matrix()
-        return random.choice(list(matrix.keys()))
-
-    @staticmethod
-    def get_random_grammar_focus() -> str:
-        """隨機抽取一個文法考點"""
-        return random.choice(ToeicMetaPool.GRAMMAR_FOCUSES)
-
-    @staticmethod
-    def get_random_reading_relation() -> str:
-        """隨機抽取多篇閱讀的文章關聯結構"""
-        return random.choice(ToeicMetaPool.READING_RELATIONS)
-
-    @staticmethod
-    def get_batch_config(category: QuestionType) -> dict:
+    def get_sequential_configs(count: int, allowed_types: list[QuestionType]) -> list[dict]:
         """
-        根據指定的題型，動態分流並注入【動態網頁/靜態備援】的強型別安全變數配置
+        依據指定的題目數量，依序且完全不重複地消耗網路新鮮語料。
+        確保抓下來的每條新聞提示詞都能達到 100% 的最高利用率。
         """
         matrix = MetaManager._get_active_theme_matrix()
-        chosen_theme = random.choice(list(matrix.keys()))
-        specific_context = random.choice(matrix[chosen_theme])
-        chars = random.sample(ToeicMetaPool.CHARACTERS, k=2)
 
-        config = {
-            ToeicGenCol.CATEGORY: category.value,
-            ToeicGenCol.THEME: chosen_theme,
-            ToeicGenCol.FORCED_CONTEXT: specific_context,
-            ToeicGenCol.FORCED_CHAR_1: chars[0],
-            ToeicGenCol.FORCED_CHAR_2: chars[1],
-            ToeicGenCol.FORCED_DATE: f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
-        }
+        # 將巢狀字典「拍平」成一個乾淨的 (大情境, 具體時事關鍵字) 排隊清單
+        flat_corpus = []
+        for theme, contexts in matrix.items():
+            for context in contexts:
+                flat_corpus.append((theme, context))
 
-        if category == QuestionType.GRAMMAR:
-            config[ToeicGenCol.GRAMMAR_FOCUS] = MetaManager.get_random_grammar_focus()
+        # 我們就從靜態備援池裡面隨機抽樣補齊剩下的空缺，確保工廠流水線不中斷
+        if len(flat_corpus) < count:
+            dbg.war(f"⚠️ 動態新鮮語料僅有 {len(flat_corpus)} 條，不足目標數 {count}，不足部分將由靜態備援池補齊。")
+            static_matrix = ToeicMetaPool.THEME_MATRIX
+            while len(flat_corpus) < count:
+                fallback_theme = random.choice(list(static_matrix.keys()))
+                fallback_context = random.choice(static_matrix[fallback_theme])
+                flat_corpus.append((fallback_theme, fallback_context))
 
-        if category == QuestionType.READING_MULTIPLE:
-            config[ToeicGenCol.READING_RELATION] = MetaManager.get_random_reading_relation()
+        # 2. 嚴格截取前 count 條語料，排除了隨機抽樣導致重複或漏掉的問題
+        target_corpus = flat_corpus[:count]
 
-        return config
+        final_configs = []
+        # 3. 開始依序組裝成強型別出題合約
+        for i, (theme, context) in enumerate(target_corpus):
+            # 隨機為這條新鮮時事指派一個當前允許的子題型（如單字、文法）
+            current_type = random.choice(allowed_types)
+            chars = random.sample(ToeicMetaPool.CHARACTERS, k=2)
+
+            config = {
+                ToeicGenCol.CATEGORY: current_type.value,
+                ToeicGenCol.THEME: theme,
+                ToeicGenCol.FORCED_CONTEXT: context,
+                ToeicGenCol.FORCED_CHAR_1: chars[0],
+                ToeicGenCol.FORCED_CHAR_2: chars[1],
+                ToeicGenCol.FORCED_DATE: f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
+            }
+
+            # 依據分配到的題型補上特殊考點
+            if current_type == QuestionType.GRAMMAR:
+                config[ToeicGenCol.GRAMMAR_FOCUS] = random.choice(ToeicMetaPool.GRAMMAR_FOCUSES)
+            elif current_type == QuestionType.READING_MULTIPLE:
+                config[ToeicGenCol.READING_RELATION] = random.choice(ToeicMetaPool.READING_RELATIONS)
+
+            final_configs.append(config)
+
+        return final_configs
+
+    # @staticmethod
+    # def get_random_grammar_focus() -> str:
+    #     """隨機抽取一個文法考點"""
+    #     return random.choice(ToeicMetaPool.GRAMMAR_FOCUSES)
+
+    # @staticmethod
+    # def get_random_reading_relation() -> str:
+    #     """隨機抽取多篇閱讀的文章關聯結構"""
+    #     return random.choice(ToeicMetaPool.READING_RELATIONS)
+
+    # @staticmethod
+    # def get_batch_config(category: QuestionType) -> dict:
+    #     """
+    #     根據指定的題型，動態分流並注入【動態網頁/靜態備援】的強型別安全變數配置
+    #     """
+    #     matrix = MetaManager._get_active_theme_matrix()
+    #     chosen_theme = random.choice(list(matrix.keys()))
+    #     specific_context = random.choice(matrix[chosen_theme])
+    #     chars = random.sample(ToeicMetaPool.CHARACTERS, k=2)
+
+    #     config = {
+    #         ToeicGenCol.CATEGORY: category.value,
+    #         ToeicGenCol.THEME: chosen_theme,
+    #         ToeicGenCol.FORCED_CONTEXT: specific_context,
+    #         ToeicGenCol.FORCED_CHAR_1: chars[0],
+    #         ToeicGenCol.FORCED_CHAR_2: chars[1],
+    #         ToeicGenCol.FORCED_DATE: f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
+    #     }
+
+    #     if category == QuestionType.GRAMMAR:
+    #         config[ToeicGenCol.GRAMMAR_FOCUS] = MetaManager.get_random_grammar_focus()
+
+    #     if category == QuestionType.READING_MULTIPLE:
+    #         config[ToeicGenCol.READING_RELATION] = MetaManager.get_random_reading_relation()
+
+    #     return config

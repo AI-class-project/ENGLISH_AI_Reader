@@ -84,35 +84,50 @@ class DynamicMetaUpdater:
         return raw_texts
 
     def transform_to_toeic_matrix(self, raw_texts: list[str]) -> dict:
-        """[Transform] 批次化升級版：將所有新聞打包一次送出，徹底絕殺 429 限流問題"""
-        dbg.log("🧠 [Transform] 啟動工業級『批次打包』清洗與分類程序...")
+        """
+        [Transform] 批次化 + 語意扭轉升級版：
+        強迫 AI 將新聞依據多益 10 大核心情境進行『配額動態分流』，絕殺特定分類霸榜問題。
+        """
+        dbg.log("🧠 [Transform] 啟動工業級『動態語意扭轉』批次清洗與分類程序...")
 
         dynamic_matrix = {theme: [] for theme in self.TARGET_THEMES}
 
-        # 建立結構化的系統提示詞，強制要求 AI 吞下一個陣列，並吐出一個結構化的結果陣列
+        # 在 System Prompt 內部嵌入嚴格的「平衡分流」與「語意扭轉」限令
         system_prompt = f"""
-        你是一位高階多益測驗語料庫清洗專家。
-        我會提供你一個包含多條真實商務新聞的清單。請你閱讀完畢後，為每一條新聞執行：
-        1. 判斷它最適合歸類到以下哪一個多益標準情境：
-           {json.dumps(self.TARGET_THEMES, ensure_ascii=False)}
-        2. 將新聞內容精煉成 1 句（20 個英文字以內）的「多益風格背景描述（環境/突發事件/商業動態）」。
+        你是一位頂尖的多益測驗語料庫大數據清洗專家。
+        我會提供你一個包含多條真實商務新聞的清單。請你閱讀完畢後，為每一條新聞執行多益情境轉化。
 
-        【強制要求】
-        你必須直接輸出一個標準的 JSON 物件 (外層為 {{ ... }})，內部包含一個名為 "results" 的陣列。
+        【核心任務與嚴格限額令】
+        1. 為了確保多益模擬試題的生態多樣性，你必須將這批新聞【均勻、合理】地分散到以下 10 大核心情境中：
+           {json.dumps(self.TARGET_THEMES, ensure_ascii=False)}
+
+        2.【動態語意扭轉原則（核心要求）】：
+           網頁新聞容易集中在科技或財經，你必須發揮高超的商務語意切入角度，嚴禁將所有新聞盲目塞進「公司財務報表與預算會議」中！
+           - 例如一則『SpaceX 開放散戶認購股票』的新聞：
+             * 不要只想到財務。你可以從「SpaceX 的跨時代募資宣傳手段」切入，歸類到【產品發表與行銷企劃】。
+             * 也可以從「員工或大眾內部福利公告」切入，歸類到【辦公室日常與人事公告】。
+           - 例如一則『AI 發展失控警告』的新聞：
+             * 可以從「高層下達最新技術開發規範命令」切入，歸類到【跨部門電子郵件溝通】。
+             * 也可以從「廠房引進自動化 AI 導致的安全合規檢驗」切入，歸類到【廠房公安與生產線維護】。
+
+        3.【配額上限】：任何單一情境在本次批次處理中，累積分配數量【不得超過總新聞數的 25%】。請強迫自己擴大商務視角！
+
+        4. 針對每條新聞，精煉出 1 句（20 個英文字以內）最具多益考感的英文背景、突發事件或環境描寫。
 
         【JSON 結構規格】
+        你必須直接輸出一個標準的 JSON 物件，內部包含一個名為 "results" 的陣列：
         {{
             "results": [
                 {{
-                    "category": "上述五大情境擇一",
-                    "context": "1 句簡短的英文背景描述"
+                    "category": "上述十多益大情境嚴格擇一貼入",
+                    "context": "1 句簡短精煉的英文多益風格背景描述"
                 }}
             ]
         }}
         """
 
-        # 將條新聞合併成一個有條理的文本 block
-        user_content = "請批次處理以下新聞清單：\n"
+        # 打包新聞素材
+        user_content = "請批次處理以下新聞清單，並嚴格執行語意扭轉平衡分流：\n"
         for i, text in enumerate(raw_texts):
             user_content += f"[{i + 1}] {text}\n"
 
@@ -123,14 +138,14 @@ class DynamicMetaUpdater:
                 config=types.GenerateContentConfig(
                     system_instruction=system_prompt,
                     response_mime_type="application/json",
-                    temperature=0.2
+                    temperature=0.4
                 )
             )
 
             raw_json = json.loads(response.text)
             results_list = raw_json.get("results", [])
 
-            dbg.log(f"📥 AI 批次處理完畢，開始分發 {len(results_list)} 條結果...")
+            dbg.log(f"📥 AI 批次扭轉處理完畢，開始平衡分流 {len(results_list)} 條結果...")
 
             for result in results_list:
                 category = result.get("category")
@@ -138,7 +153,7 @@ class DynamicMetaUpdater:
 
                 if category in self.TARGET_THEMES and context:
                     dynamic_matrix[category].append(context)
-                    dbg.log(f"   ↳ 批次萃取成功 [{category}]: {context}")
+                    dbg.log(f"   ↳ [語意分流成功] [{category}]: {context}")
 
         except Exception as e:
             dbg.error(f"❌ 批次處理新聞時發生嚴重崩潰: {e}")
@@ -161,7 +176,7 @@ class DynamicMetaUpdater:
         except Exception as e:
             dbg.error(f"寫入 JSON 失敗: {e}")
 
-    def run_pipeline(self, max_items: int = 15):
+    def run_pipeline(self, max_items: int = 10):
         print("\n" + "="*50)
         dbg.log("🚀 啟動非同步語料清洗管線")
         print("="*50)
