@@ -3,6 +3,7 @@ from core.engine.factory import ToeicQuestionFactory
 from core.loader import ToeicPoolLoader
 from tool.debug import dbg
 from tool.path import PathConfig
+from tool.update_meta import DynamicMetaUpdater
 
 
 def run_factory():
@@ -25,5 +26,10 @@ def run_factory():
 
     print("="*60 + "\n")
 
+
 if __name__ == "__main__":
-    run_factory()
+    updater = DynamicMetaUpdater()
+    updater.run_pipeline()
+
+# if __name__ == "__main__":
+#     run_factory()

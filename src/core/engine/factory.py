@@ -1,5 +1,4 @@
 import random
-from typing import Optional
 
 from core.engine.batch_runner import ToeicBatchRunner
 from core.engine.const import QuestionCategory

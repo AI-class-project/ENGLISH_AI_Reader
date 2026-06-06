@@ -36,6 +36,7 @@ class PathConfig:
     """第二層：面向應用的配置，組合或繼承第一層，可以包含檔案"""
     GEMINI_KEY = _PathFile.ROOT / "key.env"
     TOEIC_POOL = _PathFile.DATA / "toeic_pool.json"
+    DYNAMIC_META_POOL =  _PathFile.DATA / "dynamic_meta_pool.json"
 
 def setup_filesystem():
     """

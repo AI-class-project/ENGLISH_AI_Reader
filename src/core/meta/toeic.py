@@ -1,8 +1,10 @@
+import json
 import random
 from dataclasses import dataclass
 from enum import StrEnum
 
-from core.const import ToeicGenCol
+from tool.debug import dbg
+from tool.path import PathConfig
 
 
 class QuestionType(StrEnum):
@@ -21,16 +23,33 @@ class ToeicMetaPool:
     """多益出題情境與考點資料庫"""
 
     # 1. 商業情境庫
-    THEMES = [
-        "辦公室日常與人事公告 (Office & HR Announcement)",
-        "採購合約與供應商談判 (Purchasing & Supplier Contracts)",
-        "產品發表與行銷企劃 (Product Launch & Marketing)",
-        "客戶投訴與售後服務 (Customer Complaints & Service)",
-        "國際商務出差與行程安排 (Business Travel & Itinerary)",
-        "公司財務報表與預算會議 (Financial Reports & Budgets)",
-        "廠房公安與生產線維護 (Factory Safety & Maintenance)",
-        "跨部門電子郵件溝通 (Interdepartmental Email Communication)"
-    ]
+    THEME_MATRIX = {
+        "辦公室日常與人事公告 (Office & HR Announcement)": [
+            "office renovation causing temporary noise disturbance", # 環境景色
+            "annual local charity marathon sponsorship",           # 社交日常
+            "implementation of a new remote work flexible policy"
+        ],
+        "客戶投訴與售後服務 (Customer Complaints & Service)": [
+            "unacceptable billing discrepancy on the monthly invoice",
+            "rude behavior from a delivery courier last Tuesday",
+            "received damaged wooden office desk with scratches"
+        ],
+        "國際商務出差與行程安排 (Business Travel & Itinerary)": [
+            "flight cancellation due to a sudden severe blizzard",   # 天氣情境
+            "hotel overbooking during the peak conference season",
+            "heavy monsoon rainfall causing train schedule delays"  # 天氣情境
+        ],
+        "廠房公安與生產線維護 (Factory Safety & Maintenance)": [
+            "upgraded facility ventilation system inspection",      # 廠房景色
+            "mandatory chemical spill emergency drill next Thursday", # 突發公安
+            "replacing worn-out conveyor belts on the assembly floor"
+        ],
+        "跨部門電子郵件溝通 (Interdepartmental Email Communication)": [
+            "server room air conditioning failure causing system lag", # 環境突發
+            "coordinating the catering menu for the upcoming banquet",
+            "relocating the design team to the newly painted West Wing" # 景色空間
+        ]
+    }
 
     # 2. 文法考點庫 (Grammar Focus)
     GRAMMAR_FOCUSES = [
@@ -52,13 +71,43 @@ class ToeicMetaPool:
         "一篇活動行程表 (Schedule) + 一篇異動通知信 (Change Notice)"
     ]
 
+    # 4. 高頻多益英文人名庫
+    CHARACTERS = [
+        "Elena Rostova", "David Vance", "Chloe Laurent", "Kenji Tanaka",
+        "Amara Diallo", "Oliver Sterling", "Sofia Martinez", "Vikram Patel",
+        "Rachel Green", "Simon de Almeida", "Fiona Gallagher", "Nolan Ross"
+    ]
+
+
+
 class MetaManager:
-    """負責提供各種隨機組合的管理器"""
+    """負責提供各種隨機組合的管理器（具備策略二自動降級機制）"""
+
+    @staticmethod
+    def _get_active_theme_matrix() -> dict:
+        """
+        核心防線：嘗試讀取策略二網頁動態語料，若失手則無縫降級回靜態備援池
+        """
+        dynamic_path = PathConfig.DYNAMIC_META_POOL
+
+        if dynamic_path and dynamic_path.exists():
+            try:
+                with open(dynamic_path, "r", encoding="utf-8") as f:
+                    dynamic_matrix = json.load(f)
+                    if isinstance(dynamic_matrix, dict) and dynamic_matrix:
+                        # 策略二點火成功：完美使用即時網頁語料情境
+                        return dynamic_matrix
+            except Exception as e:
+                dbg.war(f"⚠️ 策略二動態語料讀取失敗 ({e})，自動啟動靜態備援防線。")
+
+        # 策略二失手時，無縫使用目前的靜態矩陣庫
+        return ToeicMetaPool.THEME_MATRIX
 
     @staticmethod
     def get_random_theme() -> str:
-        """隨機抽取一個商務情境"""
-        return random.choice(ToeicMetaPool.THEMES)
+        """隨機抽取一個商務情境 """
+        matrix = MetaManager._get_active_theme_matrix()
+        return random.choice(list(matrix.keys()))
 
     @staticmethod
     def get_random_grammar_focus() -> str:
@@ -73,20 +122,33 @@ class MetaManager:
     @staticmethod
     def get_batch_config(category: QuestionType) -> dict:
         """
-        根據指定的題型，回傳一次完整的生成配置。
+        根據指定的題型，動態分流並注入【動態網頁/靜態備援】的情境變數
         """
+        # 1. 取得當前可用的最佳情境矩陣 (自動處理動靜態分流)
+        matrix = MetaManager._get_active_theme_matrix()
+
+        # 2. 隨機抽選一個大情境字串
+        chosen_theme = random.choice(list(matrix.keys()))
+
+        # 3. 從該情境專屬的池子裡，抽取出一個具體的核心事件/天氣/景色關鍵字
+        specific_context = random.choice(matrix[chosen_theme])
+
+        # 4. 隨機抽選兩個不同的人名
+        chars = random.sample(ToeicMetaPool.CHARACTERS, k=2)
 
         config = {
-            ToeicGenCol.CATEGORY: category.value,
-            ToeicGenCol.THEME: MetaManager.get_random_theme()
+            "category": category.value,
+            "theme": chosen_theme,
+            "forced_context": specific_context,
+            "forced_char_1": chars[0],
+            "forced_char_2": chars[1],
+            "forced_date": f"{random.choice(['January', 'April', 'July', 'October'])} {random.randint(1, 28)}"
         }
 
-        # 如果是文法題，多給一個文法考點
         if category == QuestionType.GRAMMAR:
-            config[ToeicGenCol.GRAMMAR_FOCUS] = MetaManager.get_random_grammar_focus()
+            config["grammar_focus"] = MetaManager.get_random_grammar_focus()
 
-        # 如果是多篇閱讀，多給一個文章結構要求
         if category == QuestionType.READING_MULTIPLE:
-            config[ToeicGenCol.READING_RELATION] = MetaManager.get_random_reading_relation()
+            config["reading_relation"] = MetaManager.get_random_reading_relation()
 
         return config
