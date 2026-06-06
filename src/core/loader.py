@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING
 from core.const import OptionKey, ToeicQuestionCol
 from core.engine.models import (QuestionOptions, ToeicQuestionModel,
                                 ToeicSubQuestion)
-from core.meta.toeic import QuestionType
 from tool.debug import dbg
 
 if TYPE_CHECKING:

@@ -1,101 +1,5 @@
 [
   {
-    "category": "雙篇/多篇閱讀理解",
-    "theme": "廠房公安與生產線維護 (Factory Safety & Maintenance)",
-    "passages": [
-      "[DOC 1] MEMORANDUM\nTo: All Production Staff\nFrom: Facilities Management\nDate: October 12\nSubject: Emergency Maintenance of Line 4\n\nPlease be advised that Production Line 4 will undergo mandatory safety inspections and emergency maintenance starting October 15 at 8:00 A.M. This is due to a recurring sensor malfunction that poses a risk to operator safety. The line will be completely shut down for 48 hours. Employees assigned to Line 4 are required to report to the supervisor’s office at 9:00 A.M. on the first day for temporary reassignment to the packaging department. All safety gear, including hard hats and steel-toed boots, must be worn at all times during the transition period. Failure to comply will result in disciplinary action.",
-      "[DOC 2] EMAIL\nFrom: Marcus Thorne <m.thorne@factory.com>\nTo: Facilities Management\nDate: October 13\nSubject: Re: Emergency Maintenance of Line 4\n\nDear Facilities Team,\nI am one of the operators currently assigned to Line 4. Regarding your memo from yesterday, I have a concern regarding the reassignment. My certification for operating the industrial packing machinery expired last month. I have already submitted my renewal application to HR, but I have not received the updated permit yet. Will I still be required to report to the packaging department, or should I be assigned to manual inventory sorting instead? I want to ensure I remain compliant with our safety regulations.\n\nBest regards,\nMarcus Thorne"
-    ],
-    "questions": [
-      {
-        "question": "What is the primary reason for the shutdown of Production Line 4?",
-        "options": {
-          "A": "Scheduled annual maintenance",
-          "B": "A sensor issue that could endanger workers",
-          "C": "Low production output",
-          "D": "Upgrading to new machinery"
-        },
-        "answer": "B",
-        "explanation": "文中提到 due to a recurring sensor malfunction that poses a risk to operator safety，故選B。"
-      },
-      {
-        "question": "When is the maintenance on Line 4 expected to be completed?",
-        "options": {
-          "A": "October 15 at 8:00 A.M.",
-          "B": "October 16 at 9:00 A.M.",
-          "C": "October 17 at 8:00 A.M.",
-          "D": "October 18 at 9:00 A.M."
-        },
-        "answer": "C",
-        "explanation": "維護從 10/15 早上 8 點開始，為期 48 小時，因此結束時間為 10/17 早上 8 點。"
-      },
-      {
-        "question": "What are Line 4 employees expected to do on the first day of the shutdown?",
-        "options": {
-          "A": "Stay at home until the maintenance is finished",
-          "B": "Help with the maintenance of the sensors",
-          "C": "Attend a safety training session in the conference room",
-          "D": "Go to the supervisor’s office for new work assignments"
-        },
-        "answer": "D",
-        "explanation": "Memo 指出 employees are required to report to the supervisor’s office at 9:00 A.M. for temporary reassignment。"
-      },
-      {
-        "question": "Why did Marcus Thorne write the email?",
-        "options": {
-          "A": "To request an extension on his certification renewal",
-          "B": "To clarify his temporary duty status due to a certification issue",
-          "C": "To complain about the safety gear requirements",
-          "D": "To report a new malfunction on the packaging line"
-        },
-        "answer": "B",
-        "explanation": "Marcus 詢問因為證照過期，是否仍應被分配到包裝部門，故選B。"
-      },
-      {
-        "question": "What can be inferred about the factory's safety policy?",
-        "options": {
-          "A": "Employees are allowed to operate machinery without current permits",
-          "B": "Safety gear is optional during maintenance periods",
-          "C": "Strict adherence to safety protocols is mandatory",
-          "D": "The packaging department has the lowest safety standards"
-        },
-        "answer": "C",
-        "explanation": "Memo 中提到 failure to comply with safety gear rules will result in disciplinary action，顯示公司對安全規範執行嚴格。"
-      }
-    ]
-  },
-  {
-    "category": "單篇閱讀理解",
-    "theme": "跨部門電子郵件溝通",
-    "passages": [
-      "Subject: Update on Q3 Marketing Campaign Collaboration\n\nDear Team,\n\nI am writing to provide an update regarding the upcoming Q3 promotional campaign. Due to the recent server maintenance scheduled for the IT department, the launch of our digital advertising platform will be delayed by three days. Consequently, the Marketing department will need to adjust the deadline for the final creative assets submission.\n\nOriginally, all graphics and copy were due by this Friday. However, we are extending the deadline to next Tuesday, October 15th, at 5:00 PM. Please ensure that all files are uploaded to the shared server folder labeled 'Q3_Campaign_Assets' by this time. If your team anticipates any difficulty in meeting this revised schedule, please notify me directly by the end of the business day tomorrow.\n\nThank you for your flexibility and continued hard work.\n\nBest regards,\n\nSarah Jenkins\nMarketing Manager"
-    ],
-    "questions": [
-      {
-        "question": "Why is the deadline for the creative assets being extended?",
-        "options": {
-          "A": "The Marketing team needs more time to brainstorm ideas.",
-          "B": "The IT department is performing server maintenance.",
-          "C": "The server folder is currently experiencing technical errors.",
-          "D": "Sarah Jenkins is unavailable to review the materials this week."
-        },
-        "answer": "B",
-        "explanation": "信件中提到，由於 IT 部門安排的伺服器維護，數位廣告平台的上線時間延後，因此行銷部門也隨之調整了素材提交期限。"
-      },
-      {
-        "question": "What are employees instructed to do if they cannot meet the new deadline?",
-        "options": {
-          "A": "Contact the IT department for technical support.",
-          "B": "Upload the incomplete files to the shared folder.",
-          "C": "Inform Sarah Jenkins by the end of the day tomorrow.",
-          "D": "Submit the assets by Friday as originally planned."
-        },
-        "answer": "C",
-        "explanation": "信件最後一段提到，若預計無法達成新的期限，請在明天工作日結束前直接通知 Sarah Jenkins。"
-      }
-    ]
-  },
-  {
     "category": "單字克漏字",
     "theme": "產品發表與行銷企劃",
     "passages": [
@@ -177,6 +81,37 @@
   },
   {
     "category": "單篇閱讀理解",
+    "theme": "跨部門電子郵件溝通",
+    "passages": [
+      "Subject: Update on Q3 Marketing Campaign Collaboration\n\nDear Team,\n\nI am writing to provide an update regarding the upcoming Q3 promotional campaign. Due to the recent server maintenance scheduled for the IT department, the launch of our digital advertising platform will be delayed by three days. Consequently, the Marketing department will need to adjust the deadline for the final creative assets submission.\n\nOriginally, all graphics and copy were due by this Friday. However, we are extending the deadline to next Tuesday, October 15th, at 5:00 PM. Please ensure that all files are uploaded to the shared server folder labeled 'Q3_Campaign_Assets' by this time. If your team anticipates any difficulty in meeting this revised schedule, please notify me directly by the end of the business day tomorrow.\n\nThank you for your flexibility and continued hard work.\n\nBest regards,\n\nSarah Jenkins\nMarketing Manager"
+    ],
+    "questions": [
+      {
+        "question": "Why is the deadline for the creative assets being extended?",
+        "options": {
+          "A": "The Marketing team needs more time to brainstorm ideas.",
+          "B": "The IT department is performing server maintenance.",
+          "C": "The server folder is currently experiencing technical errors.",
+          "D": "Sarah Jenkins is unavailable to review the materials this week."
+        },
+        "answer": "B",
+        "explanation": "信件中提到，由於 IT 部門安排的伺服器維護，數位廣告平台的上線時間延後，因此行銷部門也隨之調整了素材提交期限。"
+      },
+      {
+        "question": "What are employees instructed to do if they cannot meet the new deadline?",
+        "options": {
+          "A": "Contact the IT department for technical support.",
+          "B": "Upload the incomplete files to the shared folder.",
+          "C": "Inform Sarah Jenkins by the end of the day tomorrow.",
+          "D": "Submit the assets by Friday as originally planned."
+        },
+        "answer": "C",
+        "explanation": "信件最後一段提到，若預計無法達成新的期限，請在明天工作日結束前直接通知 Sarah Jenkins。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
     "theme": "廠房公安與生產線維護",
     "passages": [
       "To: All Production Staff\nFrom: Marcus Thorne, Plant Manager\nDate: October 12\nSubject: Urgent: Scheduled Maintenance and Safety Protocol Update\n\nThis is to inform all personnel that the main assembly line (Line 4) will be shut down for mandatory maintenance from October 18th to October 20th. During this period, our technical team will be replacing the hydraulic sensors to ensure compliance with the new regional safety standards. \n\nAll staff assigned to Line 4 are required to attend a mandatory safety briefing on October 17th at 9:00 AM in the Training Center. Please be advised that the use of personal protective equipment (PPE), specifically the upgraded heat-resistant gloves, will be strictly enforced upon the line's reopening. Failure to comply with these updated protocols will result in immediate disciplinary action. We appreciate your cooperation in maintaining a safe work environment."
@@ -203,6 +138,102 @@
         },
         "answer": "C",
         "explanation": "信件中明確指出，所有被分配到 Line 4 的員工必須在 10 月 17 日上午 9 點參加強制性的安全說明會（mandatory safety briefing），故選C。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "辦公室日常與人事公告",
+    "passages": [
+      "To: All Staff\nFrom: Human Resources Department\nDate: October 15, 2023\nSubject: Office Relocation and Desk Reassignment\n\nPlease be advised that our corporate headquarters will undergo a major renovation starting November 1. Due to the construction, all employees in the Marketing and Sales departments will be temporarily relocated to the third floor of the West Wing. \n\nWe have attached a floor plan detailing the new desk assignments. Please ensure that all personal items are packed into the provided moving crates by the end of business on October 31. IT support staff will be available on November 2 to assist with the reconnection of computers and peripherals. If you have any concerns regarding your assigned workspace, please submit a formal request to the HR office by October 25. We appreciate your cooperation during this transition."
+    ],
+    "questions": [
+      {
+        "question": "What are employees in the Marketing and Sales departments required to do by October 31?",
+        "options": {
+          "A": "Submit a formal request for a new desk.",
+          "B": "Pack their personal belongings into moving crates.",
+          "C": "Reconnect their computers and peripherals.",
+          "D": "Complete the renovation of the third floor."
+        },
+        "answer": "B",
+        "explanation": "信件中明確提到：Please ensure that all personal items are packed into the provided moving crates by the end of business on October 31. 因此正確答案為 B。"
+      },
+      {
+        "question": "What should an employee do if they are unhappy with their new desk location?",
+        "options": {
+          "A": "Contact the IT support staff immediately.",
+          "B": "Move their belongings to an empty desk.",
+          "C": "Send a formal request to HR by October 25.",
+          "D": "Wait until the renovation is finished in November."
+        },
+        "answer": "C",
+        "explanation": "信件中提到：If you have any concerns regarding your assigned workspace, please submit a formal request to the HR office by October 25. 因此正確答案為 C。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "廠房公安與生產線維護 (Factory Safety & Maintenance)",
+    "passages": [
+      "[DOC 1] MEMORANDUM\nTo: All Production Staff\nFrom: Facilities Management\nDate: October 12\nSubject: Emergency Maintenance of Line 4\n\nPlease be advised that Production Line 4 will undergo mandatory safety inspections and emergency maintenance starting October 15 at 8:00 A.M. This is due to a recurring sensor malfunction that poses a risk to operator safety. The line will be completely shut down for 48 hours. Employees assigned to Line 4 are required to report to the supervisor’s office at 9:00 A.M. on the first day for temporary reassignment to the packaging department. All safety gear, including hard hats and steel-toed boots, must be worn at all times during the transition period. Failure to comply will result in disciplinary action.",
+      "[DOC 2] EMAIL\nFrom: Marcus Thorne <m.thorne@factory.com>\nTo: Facilities Management\nDate: October 13\nSubject: Re: Emergency Maintenance of Line 4\n\nDear Facilities Team,\nI am one of the operators currently assigned to Line 4. Regarding your memo from yesterday, I have a concern regarding the reassignment. My certification for operating the industrial packing machinery expired last month. I have already submitted my renewal application to HR, but I have not received the updated permit yet. Will I still be required to report to the packaging department, or should I be assigned to manual inventory sorting instead? I want to ensure I remain compliant with our safety regulations.\n\nBest regards,\nMarcus Thorne"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the shutdown of Production Line 4?",
+        "options": {
+          "A": "Scheduled annual maintenance",
+          "B": "A sensor issue that could endanger workers",
+          "C": "Low production output",
+          "D": "Upgrading to new machinery"
+        },
+        "answer": "B",
+        "explanation": "文中提到 due to a recurring sensor malfunction that poses a risk to operator safety，故選B。"
+      },
+      {
+        "question": "When is the maintenance on Line 4 expected to be completed?",
+        "options": {
+          "A": "October 15 at 8:00 A.M.",
+          "B": "October 16 at 9:00 A.M.",
+          "C": "October 17 at 8:00 A.M.",
+          "D": "October 18 at 9:00 A.M."
+        },
+        "answer": "C",
+        "explanation": "維護從 10/15 早上 8 點開始，為期 48 小時，因此結束時間為 10/17 早上 8 點。"
+      },
+      {
+        "question": "What are Line 4 employees expected to do on the first day of the shutdown?",
+        "options": {
+          "A": "Stay at home until the maintenance is finished",
+          "B": "Help with the maintenance of the sensors",
+          "C": "Attend a safety training session in the conference room",
+          "D": "Go to the supervisor’s office for new work assignments"
+        },
+        "answer": "D",
+        "explanation": "Memo 指出 employees are required to report to the supervisor’s office at 9:00 A.M. for temporary reassignment。"
+      },
+      {
+        "question": "Why did Marcus Thorne write the email?",
+        "options": {
+          "A": "To request an extension on his certification renewal",
+          "B": "To clarify his temporary duty status due to a certification issue",
+          "C": "To complain about the safety gear requirements",
+          "D": "To report a new malfunction on the packaging line"
+        },
+        "answer": "B",
+        "explanation": "Marcus 詢問因為證照過期，是否仍應被分配到包裝部門，故選B。"
+      },
+      {
+        "question": "What can be inferred about the factory's safety policy?",
+        "options": {
+          "A": "Employees are allowed to operate machinery without current permits",
+          "B": "Safety gear is optional during maintenance periods",
+          "C": "Strict adherence to safety protocols is mandatory",
+          "D": "The packaging department has the lowest safety standards"
+        },
+        "answer": "C",
+        "explanation": "Memo 中提到 failure to comply with safety gear rules will result in disciplinary action，顯示公司對安全規範執行嚴格。"
       }
     ]
   },
@@ -257,6 +288,71 @@
         },
         "answer": "C",
         "explanation": "DOC 2 指出 Q&A 環節將會在 02:45 PM 開始。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "跨部門電子郵件溝通",
+    "passages": [
+      "[DOC 1] \n\nTECH-ELITE PROMOTION: The All-New 'Zenith X1' Laptop\n\nExperience the pinnacle of performance with the Zenith X1. Designed for professionals who demand speed and reliability, our latest model features a 16-hour battery life, a lightweight aluminum chassis, and the revolutionary 'Silence-Cool' cooling system. \n\nSpecial Launch Offer: Purchase the Zenith X1 before October 31st and receive a complimentary 'Pro-Dock' docking station (valued at $199). \n\nVisit our flagship store or order online at www.tech-elite.com. Enjoy free shipping on all orders over $500. We guarantee a 30-day satisfaction policy on all hardware purchases.",
+      "[DOC 2]\n\nTo: Customer Support (support@tech-elite.com)\nFrom: Marcus Thorne (m.thorne@logistics-plus.com)\nSubject: Issue with Zenith X1 Order #99281\n\nDear Support Team,\n\nI am writing to express my frustration regarding my recent purchase of the Zenith X1 laptop. I ordered the device on October 25th, specifically to take advantage of the 'Pro-Dock' promotion. \n\nHowever, upon receiving the package yesterday, I found the laptop, but the docking station was missing. Furthermore, the laptop itself has a noticeable dent on the bottom casing. I attempted to call your support hotline, but the line was busy for over an hour. Given that I rely on this equipment for my remote logistics work, I require an immediate resolution. Please arrange for a replacement unit and the missing docking station to be sent via express shipping. I have attached photos of the damage for your reference.\n\nRegards,\nMarcus Thorne"
+    ],
+    "questions": [
+      {
+        "question": "What is a key feature of the Zenith X1 according to the advertisement?",
+        "options": {
+          "A": "It comes with a built-in printer.",
+          "B": "It has an aluminum chassis.",
+          "C": "It includes a 5-year warranty.",
+          "D": "It is priced under $500."
+        },
+        "answer": "B",
+        "explanation": "廣告中提到 Zenith X1 具有輕量化鋁製機身 (lightweight aluminum chassis)。"
+      },
+      {
+        "question": "What must a customer do to receive the free 'Pro-Dock'?",
+        "options": {
+          "A": "Purchase the laptop before the end of October.",
+          "B": "Sign up for the company newsletter.",
+          "C": "Order the laptop from a physical retail store only.",
+          "D": "Spend more than $1,000 on accessories."
+        },
+        "answer": "A",
+        "explanation": "廣告說明在 10 月 31 日前購買即可獲得免費的 docking station。"
+      },
+      {
+        "question": "Why did Marcus Thorne contact the customer support team?",
+        "options": {
+          "A": "He wants to return the laptop for a full refund.",
+          "B": "He is inquiring about the shipping status of his order.",
+          "C": "The docking station was not included and the laptop is damaged.",
+          "D": "He is complaining about the poor battery life of the device."
+        },
+        "answer": "C",
+        "explanation": "Marcus 在信中指出 Docking station 遺失且筆電底部有凹痕。"
+      },
+      {
+        "question": "What does Marcus Thorne expect the company to do?",
+        "options": {
+          "A": "Provide a full refund for the order.",
+          "B": "Send a replacement laptop and the missing docking station.",
+          "C": "Repair the dented laptop at a local service center.",
+          "D": "Offer him a discount on his next purchase."
+        },
+        "answer": "B",
+        "explanation": "Marcus 要求公司安排更換筆電並透過快遞寄送遺失的 docking station。"
+      },
+      {
+        "question": "Which statement is true regarding Marcus Thorne's order?",
+        "options": {
+          "A": "He ordered the laptop on October 30th.",
+          "B": "He was able to resolve the issue via the telephone hotline.",
+          "C": "He is satisfied with the speed of the laptop.",
+          "D": "He qualified for the promotional offer mentioned in the advertisement."
+        },
+        "answer": "D",
+        "explanation": "Marcus 在 10 月 25 日購買，符合 10 月 31 日前的促銷條件，因此他具備領取贈品的資格。"
       }
     ]
   }

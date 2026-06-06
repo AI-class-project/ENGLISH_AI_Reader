@@ -4,10 +4,11 @@ import json
 import os
 import time
 
-from core.const import ToeicGenCol
+from core.const import ToeicGenCol, ToeicQuestionCol
 from core.engine.config import GENERATE_BATCH_CONFIG
 from core.engine.models import ToeicQuestionModel
-from core.llm.generator import ToeicGenerator, ToeicQuestionCol
+from core.llm.generator import ToeicGenerator
+from core.meta.toeic import QuestionType
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -89,7 +90,6 @@ class ToeicBatchRunner:
         """將高階巢狀物件清單，完美序列化並附加 (Append) 到 JSON 存檔中"""
         try:
             new_serialized_data = [dataclasses.asdict(m) for m in data]
-
             existing_data = []
 
             file_exists = self.output_dir.exists() if hasattr(self.output_dir, "exists") else os.path.exists(self.output_dir)
@@ -103,6 +103,11 @@ class ToeicBatchRunner:
 
             # 將新資料合併到舊資料池中
             combined_data = existing_data + new_serialized_data
+            # 建立權重字典：{"單字克漏字": 0, "文法選擇": 1, ...}
+            type_order = {t.value: i for i, t in enumerate(QuestionType)}
+
+            # 對 dict 清單進行排序
+            combined_data.sort(key=lambda item: type_order.get(item.get(ToeicQuestionCol.CATEGORY, ""), 999))
 
             # 將合併後的完整大陣列，重新覆蓋寫入檔案
             with open(self.output_dir, "w", encoding="utf-8") as f:
