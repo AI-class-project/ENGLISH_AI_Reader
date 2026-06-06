@@ -1,50 +1,37 @@
 import json
-import random
+import time
 import traceback
 
-import google.generativeai as genai
-from google.api_core.exceptions import (InternalServerError, ResourceExhausted,
-                                        ServiceUnavailable)
-from google.generativeai.types import generation_types
+from google import genai
+from google.genai import types
+from google.genai.errors import APIError
 
 from core.security import KeyManager
-# 引入你的基礎建設
 from tool.debug import dbg
 
 
 class ToeicGenerator:
-    """多益題目 AI 生成引擎 (具備高可用性模型降級與金鑰輪詢機制)"""
-
-    # 將使用者的模型策略定為類別常數
+    """
+    多益題目 AI 生成引擎 (工業級重構版)
+    採用新版 SDK 實作完美隔離的 API Key 切換機制與防彈 JSON 解析。
+    """
     FALLBACK_MODELS = [
-        'models/gemini-3.1-flash-lite-preview', # 🥇 (15 RPM / 500 RPD) - 海量掃描專用 (建議優先使用這個高額度模型來出題)
-        'models/gemini-3-flash-preview',        # 🥈 (5 RPM / 20 RPD) - 高智商，專解複雜新聞
-        'models/gemini-2.5-flash-lite',         # 🥉 (10 RPM / 20 RPD) - 伺服器波動時替補
-        'models/gemini-2.5-flash',              # 🎖️ (5 RPM / 20 RPD) - 最後底線
+        'models/gemini-3.1-flash-lite-preview', # 🥇 (15 RPM) - 優先使用，速度快額度高
+        'models/gemini-3-flash-preview',        # 🥈 (5 RPM) - 高智商備援
+        'models/gemini-2.5-flash-lite',         # 🥉 (10 RPM) - 伺服器波動時替補
+        'models/gemini-2.5-flash',              # 🎖️ (5 RPM) - 最後底線
     ]
 
     def __init__(self):
-        # 1. 取得金鑰池
         self.api_keys = KeyManager.get_gemini_keys()
         if not self.api_keys:
             dbg.error("❌ 無法啟動生成引擎：金鑰池為空！")
             raise ValueError("Missing Gemini API Keys")
 
         dbg.log(f"✅ 引擎初始化成功，已載入 {len(self.api_keys)} 組備用金鑰。")
-
-    def _create_model(self, model_name: str) -> genai.GenerativeModel:
-        """根據指定的模型名稱建立 Model 實例"""
-        return genai.GenerativeModel(
-            model_name=model_name,
-            system_instruction=self._get_system_prompt(),
-            generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.7
-            )
-        )
+        self.system_instruction = self._get_system_prompt()
 
     def _get_system_prompt(self) -> str:
-        """核心系統提示詞"""
         return """
         你是一位專業的多益（TOEIC）首席出題官方與高階英文講師。
         請根據使用者的要求，生成符合多益商務情境的全新英文題目。
@@ -61,70 +48,76 @@ class ToeicGenerator:
           "option_b": "字串",
           "option_c": "字串",
           "option_d": "字串",
-          "answer": "字串 (A, B, C 或 D)",
-          "explanation": "字串 (必須包含完整的【翻譯】與詳細的【解析】)"
+          "answer": "字串 (只能是 A, B, C 或 D)",
+          "explanation": "字串 (包含完整的【翻譯】與詳細的【解析】)"
         }
         """
 
     def generate_question(self, category: str, theme: str = "商務會議") -> dict | None:
-        """
-        呼叫 API 生成單道題目 (具備自動降級與金鑰切換機制)
-        """
+        """嘗試以二維瀑布機制呼叫 Gemini 生成題目"""
         prompt = f"請生成一道【{category}】題型，情境設定為【{theme}】。"
         dbg.var(category=category, theme=theme)
 
-        # 💡 外層迴圈：模型降級策略
         for model_name in self.FALLBACK_MODELS:
+            for key_idx, current_key in enumerate(self.api_keys):
+                key_tail = current_key[-4:] if len(current_key) > 4 else "UNKN"
+                dbg.log(f"📡 嘗試出題 - 模型: {model_name} | 金鑰: #{key_idx + 1} (*{key_tail})")
 
-            # 💡 內層迴圈：金鑰輪詢策略 (每次切換模型，都打亂 Key 確保負載均衡)
-            keys_pool = list(self.api_keys)
-            random.shuffle(keys_pool)
-
-            for api_key in keys_pool:
-                # 隱藏金鑰前綴，只印出最後 4 碼供 Debug 追蹤
-                key_tail = api_key[-4:] if len(api_key) > 4 else "UNKN"
-
+                raw_text = ""
                 try:
-                    # 設定當前使用的 Key 並建立模型
-                    genai.configure(api_key=api_key)
-                    model = self._create_model(model_name)
+                    client = genai.Client(api_key=current_key)
 
-                    dbg.log(f"📡 [呼叫中] 模型: {model_name} | 金鑰: *{key_tail}")
-                    response = model.generate_content(prompt)
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(
+                            system_instruction=self.system_instruction,
+                            response_mime_type="application/json",
+                            temperature=0.7,
+                        )
+                    )
 
-                    if not response.text:
-                        dbg.war(f"⚠️ [{model_name} | *{key_tail}] 回傳空值，嘗試下一組設定...")
-                        continue # 嘗試下一把 Key
+                    raw_text = response.text.strip() if response.text else ""
+                    if not raw_text:
+                        dbg.war(f"[{model_name}] 回傳空字串，嘗試下一把 Key...")
+                        continue
 
-                    result_dict = json.loads(response.text)
-                    dbg.log(f"✅ 成功生成題目！(使用模型: {model_name} | 金鑰: *{key_tail})")
-                    dbg.dump(result_dict, label="Gemini_Output")
+                    if "```" in raw_text:
+                        raw_text = raw_text.replace("```json", "").replace("```", "").strip()
+
+                    start_idx = raw_text.find('{')
+                    end_idx = raw_text.rfind('}')
+                    if start_idx != -1 and end_idx != -1:
+                        raw_text = raw_text[start_idx:end_idx+1]
+
+                    result_dict = json.loads(raw_text)
+                    dbg.log(f"🎉 成功生成題目！(使用模型: {model_name})")
+                    dbg.dump(result_dict, label="Generated_Question")
 
                     return result_dict
 
-                except ResourceExhausted:
-                    # 這是最常發生的狀況：API 額度耗盡 (429 Too Many Requests)
-                    dbg.war(f"🛑 [配額耗盡] 模型: {model_name} | 金鑰: *{key_tail} 已達 RPM/RPD 上限，切換金鑰...")
-                    continue # 繼續內層迴圈，嘗試下一把 Key
+                except APIError as api_err:
+                    if api_err.code == 429:
+                        dbg.war(f"🛑 [{model_name}] API Key #{key_idx + 1} 額度耗盡 (429 Too Many Requests)，切換下一把 Key...")
+                        time.sleep(0.5)
+                        continue
+                    else:
+                        dbg.error(f"🌩️ [{model_name}] 發生伺服器錯誤 (Code: {api_err.code}): {api_err.message}")
+                        break
 
-                except (InternalServerError, ServiceUnavailable) as e:
-                    # Google 伺服器端錯誤 (500 / 503)
-                    dbg.war(f"🌩️ [伺服器異常] 模型: {model_name} 發生錯誤 ({e})，切換金鑰...")
-                    continue # 繼續內層迴圈，嘗試下一把 Key
+                except ValueError as ve:
+                    # 通常是觸發安全審查被阻擋 (Safety Block)
+                    dbg.war(f"🛡️ [{model_name}] 題目內容觸發安全過濾器: {ve}")
+                    break
 
-                except json.JSONDecodeError as e:
-                    # JSON 格式崩潰：通常是該模型的該次生成發瘋，直接用同一把 Key 再試一次或換 Key
-                    dbg.error(f"❌ [格式損壞] 模型: {model_name} 輸出的不是合法 JSON: {e}")
-                    continue
-
-                except generation_types.StopCandidateException as e:
-                    dbg.error(f"❌ [安全阻擋] 題目內容觸發安全審查: {e}")
-                    return None # 觸發安全審查通常與 Prompt 有關，不需盲目重試
+                except json.JSONDecodeError:
+                    dbg.error(f"❌ [{model_name}] 徹底無法解析為 JSON。\nLLM 原始輸出為: {raw_text}")
+                    break
 
                 except Exception as e:
-                    dbg.error(f"❌ [未預期錯誤]: {e}\n{traceback.format_exc()}")
+                    # 網路斷線等未知錯誤，換 Key 再試一次
+                    dbg.error(f"❌ 發生未預期錯誤: {e}\n{traceback.format_exc()}")
                     continue
 
-        # 如果雙層迴圈全部跑完還是沒有 return，代表徹底失敗
         dbg.error("🚨 嚴重警告：所有模型與金鑰池皆已嘗試完畢，生成徹底失敗！")
         return None
