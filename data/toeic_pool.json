@@ -116,6 +116,24 @@
     ]
   },
   {
+    "category": "文法選擇",
+    "theme": "國際商務出差與行程安排",
+    "passages": [],
+    "questions": [
+      {
+        "question": "After comparing the flight options for the upcoming Tokyo conference, the travel coordinator concluded that the direct morning flight is ______ more convenient than the evening connecting flight.",
+        "options": {
+          "A": "very",
+          "B": "much",
+          "C": "too",
+          "D": "most"
+        },
+        "answer": "B",
+        "explanation": "在比較級形容詞（more convenient）前，我們使用 much, far, even, still 等詞來加強語氣。A、C 選項不能修飾比較級，D 選項用於最高級。"
+      }
+    ]
+  },
+  {
     "category": "單篇閱讀理解",
     "theme": "跨部門電子郵件溝通",
     "passages": [
@@ -205,6 +223,48 @@
         },
         "answer": "C",
         "explanation": "信件中提到：If you have any concerns regarding your assigned workspace, please submit a formal request to the HR office by October 25. 因此正確答案為 C。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "公司財務報表與預算會議",
+    "passages": [
+      "To: All Department Heads\nFrom: Sarah Jenkins, CFO\nDate: October 12\nSubject: Q4 Budget Review and Cost-Cutting Measures\n\nDear Team,\n\nFollowing our review of the third-quarter financial statement, it has become evident that our operational expenditures have exceeded initial projections by 12%. While revenue growth remains steady, the rising costs of raw materials and logistics have significantly impacted our net profit margins. \n\nTo ensure we meet our year-end fiscal targets, we must implement immediate cost-saving initiatives. Effective November 1, all non-essential business travel is suspended until further notice. Additionally, department heads are requested to review their proposed budgets for Q4 and identify at least 10% in discretionary spending that can be deferred to the next fiscal year. \n\nWe will hold a mandatory budget planning meeting on October 20 at 10:00 AM in the main conference room to discuss these adjustments. Please bring your updated budget proposals for final review. Your cooperation in maintaining our company’s financial health is greatly appreciated.\n\nBest regards,\nSarah Jenkins\nChief Financial Officer"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the company's current financial situation?",
+        "options": {
+          "A": "A decline in overall sales revenue.",
+          "B": "Unexpected increases in operational and material costs.",
+          "C": "A failure to reach the year-end fiscal goals.",
+          "D": "The suspension of all international business travel."
+        },
+        "answer": "B",
+        "explanation": "文章提到營收穩定但原物料與物流成本上升，導致淨利潤受影響，故選B。"
+      },
+      {
+        "question": "What are department heads required to do by November 1?",
+        "options": {
+          "A": "Submit a report on third-quarter travel expenses.",
+          "B": "Increase their discretionary spending by 10%.",
+          "C": "Identify and defer 10% of discretionary expenditures.",
+          "D": "Cancel all scheduled meetings for the remainder of the year."
+        },
+        "answer": "C",
+        "explanation": "信中要求部門主管檢視預算並找出至少10%的可自由支配支出推遲至下一財年。"
+      },
+      {
+        "question": "What is expected of department heads during the meeting on October 20?",
+        "options": {
+          "A": "They must present their revised budget plans.",
+          "B": "They need to vote on new travel policies.",
+          "C": "They are to sign off on the third-quarter financial statement.",
+          "D": "They must recruit new members for the finance committee."
+        },
+        "answer": "A",
+        "explanation": "信件最後一段提到會議當天需攜帶更新後的預算提案供最終審查。"
       }
     ]
   },

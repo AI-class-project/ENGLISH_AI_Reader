@@ -25,13 +25,12 @@ class ToeicQuestionFactory:
         dbg.log(f"🏭 [出題工廠] 啟動流水線！目標數量: {count}，指定大類: {category.name}")
 
         # 1. 依據 Enum 狀態，精準過濾允許抽籤的題型池
-        allowed_types = list(QuestionType)
+        allowed_types = QuestionType.get_all_type()
 
         if category == QuestionCategory.READING:
             allowed_types = [QuestionType.READING_SINGLE, QuestionType.READING_MULTIPLE]
         elif category == QuestionCategory.SINGLE_CHOICE:
             allowed_types = [QuestionType.VOCABULARY, QuestionType.GRAMMAR]
-        # 若為 RANDOM，則維持全清單大亂鬥
 
         pool = []
 
