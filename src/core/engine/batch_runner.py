@@ -9,6 +9,7 @@ from core.engine.config import GENERATE_BATCH_CONFIG
 from core.engine.models import ToeicQuestionModel
 from core.llm.generator import ToeicGenerator
 from core.meta.toeic import QuestionType
+from core.storage.toeic_repo import ToeicQuestionRepository
 from tool.debug import dbg
 from tool.path import PathConfig
 
@@ -18,42 +19,16 @@ class ToeicBatchRunner:
 
     def __init__(self):
         self.generator = ToeicGenerator()
-        self.output_dir = PathConfig.TOEIC_POOL
+        #self.output_dir = PathConfig.TOEIC_POOL
+        self.repo = ToeicQuestionRepository()
 
     def _load_historical_fingerprints(self) -> set:
-        """讀取本地題庫，預載歷史題目的 MD5 指紋以防止跨次執行撞車"""
-        fingerprints = set()
-        file_exists = self.output_dir.exists() if hasattr(self.output_dir, "exists") else os.path.exists(self.output_dir)
-
-        if not file_exists:
-            return fingerprints
-
+        """從 Supabase 題庫讀取歷史題目指紋，防止跨次執行重複出題"""
         try:
-            with open(self.output_dir, "r", encoding="utf-8") as f:
-                existing_data = json.load(f)
-
-                for item in existing_data:
-                    raw_passages = item.get(ToeicQuestionCol.PASSAGES.value, [])
-                    raw_questions = item.get(ToeicQuestionCol.QUESTIONS.value, [])
-
-                    # 擷取歷史文章前綴
-                    passage_prefix = raw_passages[0][:GENERATE_BATCH_CONFIG.PASSAGE_PREFIX_MAX] if raw_passages else ""
-
-                    for q in raw_questions:
-                        q_text = q.get(ToeicQuestionCol.QUESTION.value, "").strip()
-                        if not q_text:
-                            continue
-
-                        # 復刻特徵組合演算法並塞入 set
-                        unique_feature = f"{passage_prefix}_{q_text}"
-                        hist_fp = hashlib.md5(unique_feature.encode('utf-8')).hexdigest()
-                        fingerprints.add(hist_fp)
-
-            dbg.log(f"🛡️ 系統啟動：成功從本地快取預載 {len(fingerprints)} 筆歷史題目指紋防線。")
-        except (json.JSONDecodeError, Exception) as e:
-            dbg.war(f"⚠️ 無法讀取歷史題庫建立指紋，將以空集合啟動: {e}")
-
-        return fingerprints
+            return self.repo.load_all_fingerprints()
+        except Exception as e:
+            dbg.war(f"⚠️ 無法從 Supabase 讀取歷史題目指紋，將以空集合啟動: {e}")
+            return set()
 
     def generate_batch(self, count: int, config: dict) -> list[ToeicQuestionModel]:
         """
@@ -123,33 +98,12 @@ class ToeicBatchRunner:
         return generated_list[:count]
 
     def save_to_json(self, data: list[ToeicQuestionModel]):
-        """將高階巢狀物件清單，完美序列化並附加 (Append) 到 JSON 存檔中"""
+        """
+        原本是寫入 toeic_pool.json。
+        現在改為寫入 Supabase。
+        保留函式名稱是為了避免 factory.py 需要同步修改。
+        """
         try:
-            new_serialized_data = [dataclasses.asdict(m) for m in data]
-            existing_data = []
-
-            file_exists = self.output_dir.exists() if hasattr(self.output_dir, "exists") else os.path.exists(self.output_dir)
-
-            if file_exists:
-                with open(self.output_dir, "r", encoding="utf-8") as f:
-                    try:
-                        existing_data = json.load(f)
-                    except json.JSONDecodeError:
-                        dbg.war("⚠️ 舊 JSON 檔案為空或格式損毀，系統將重新建立題庫。")
-
-            # 將新資料合併到舊資料池中
-            combined_data = existing_data + new_serialized_data
-            # 建立權重字典：{"單字克漏字": 0, "文法選擇": 1, ...}
-            type_order = {t.value: i for i, t in enumerate(QuestionType)}
-
-            # 對 dict 清單進行排序
-            combined_data.sort(key=lambda item: type_order.get(item.get(ToeicQuestionCol.CATEGORY, ""), 999))
-
-            # 將合併後的完整大陣列，重新覆蓋寫入檔案
-            with open(self.output_dir, "w", encoding="utf-8") as f:
-                json.dump(combined_data, f, ensure_ascii=False, indent=2)
-
-            dbg.log(f"💾 【題庫累積匯出成功】本次新增 {len(data)} 組，題庫總計: {len(combined_data)} 組。")
-
+            self.repo.insert_question_groups(data)
         except Exception as e:
-            dbg.error(f"❌ 寫入 JSON 題庫檔案失敗: {e}")
+            dbg.error(f"❌ 寫入 Supabase 題庫失敗: {e}")

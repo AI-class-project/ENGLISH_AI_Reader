@@ -112,6 +112,62 @@
     ]
   },
   {
+    "category": "文法選擇",
+    "theme": "辦公室新進員工經驗分享",
+    "passages": [
+      "January 24: During the onboarding session, Oliver Sterling remarked that his refined approach to networking was _______ effective than the traditional methods he used in his previous role."
+    ],
+    "questions": [
+      {
+        "question": "During the onboarding session, Oliver Sterling remarked that his refined approach to networking was ______ effective than the traditional methods he used in his previous role.",
+        "options": {
+          "A": "very",
+          "B": "much more",
+          "C": "the most",
+          "D": "too much"
+        },
+        "answer": "B",
+        "explanation": "本題考查比較級的修飾語。句中出現了 'than'，因此必須使用比較級 'more effective'。'much' 是用來修飾比較級的副詞，表示程度上的強調（更有效得多）。A選項用於原級，C選項為最高級，D選項語意不符且無法修飾形容詞。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "飲料公司產品召回通知",
+    "passages": [],
+    "questions": [
+      {
+        "question": "On January 19, Chloe Laurent issued a formal apology to customers after the company received several ______ reports regarding the safety of the seasonal fruit juice line.",
+        "options": {
+          "A": "disturb",
+          "B": "disturbing",
+          "C": "disturbed",
+          "D": "disturbingly"
+        },
+        "answer": "B",
+        "explanation": "本題考查分詞作為形容詞的用法。空格處需修飾名詞 reports。disturbing（令人不安的）用於描述事物本身具有的特性，而 disturbed（感到不安的）則用於描述人的感受。在此情境下，關於產品安全問題的報告是「令人不安的」，故選 (B)。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "國際商務出差與行程安排",
+    "passages": [],
+    "questions": [
+      {
+        "question": "Regarding the national AI investment summit on April 15, Nolan Ross suggested that the delegation ______ the official agenda to include a discussion on ethical framework regulations.",
+        "options": {
+          "A": "reviews",
+          "B": "reviewed",
+          "C": "review",
+          "D": "will review"
+        },
+        "answer": "C",
+        "explanation": "本題考點為動詞 suggest 後的子句用法。當 suggest (建議) 後接 that 子句時，子句內的動詞需使用「原形動詞」，因為這是一個隱含的虛擬語氣（省略了 should）。因此，正確答案為 review。"
+      }
+    ]
+  },
+  {
     "category": "單篇閱讀理解",
     "theme": "Corporate Restructuring and Store Closures Announcement",
     "passages": [
@@ -339,6 +395,190 @@
         },
         "answer": "B",
         "explanation": "兩篇文章顯示運營部門的變更需要維護部門的配合與專業評估，體現了跨部門協調的重要性。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "辦公室日常與人事公告：新進員工經驗分享",
+    "passages": [
+      "[DOC 1] MEMORANDUM\nTo: All Staff\nFrom: HR Department\nDate: April 25\nSubject: Welcome New Team Members and Career Workshop\n\nWe are pleased to announce that Kenji Tanaka and Nolan Ross have officially joined our marketing division starting today. To foster professional development, the company will host a session on May 5 where Kenji and Nolan will share strategies for successful job applications and career advancement. Having recently navigated our rigorous recruitment process, they are eager to provide insights into how to stand out in a competitive market. All junior staff members are encouraged to attend and learn from their recent experiences.",
+      "[DOC 2] EMAIL\nFrom: Sarah Jenkins\nTo: Kenji Tanaka; Nolan Ross\nDate: April 25\nSubject: Re: Welcome to the team!\n\nDear Kenji and Nolan,\n\nWelcome aboard! I am particularly interested in the upcoming workshop. I have been with the firm for two years and am looking to move into a senior role. Could you please clarify if the session on May 5 will cover internal promotion strategies, or will it focus strictly on external job applications? I want to make sure I prepare the right questions. Also, I noticed on your profiles that you both come from diverse backgrounds—do you suggest focusing on soft skills or technical certifications for advancement? Looking forward to your input.\n\nBest regards,\nSarah Jenkins\nMarketing Associate"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the workshop mentioned in both documents?",
+        "options": {
+          "A": "To review the performance of current staff",
+          "B": "To discuss strategies for career growth and job application success",
+          "C": "To train new hires on company software",
+          "D": "To announce the resignation of senior management"
+        },
+        "answer": "B",
+        "explanation": "兩篇文章皆提到該研討會旨在分享求職策略與職業晉升的經驗。"
+      },
+      {
+        "question": "When did Kenji Tanaka and Nolan Ross officially start their new positions?",
+        "options": {
+          "A": "April 25",
+          "B": "May 5",
+          "C": "Two years ago",
+          "D": "They have not started yet"
+        },
+        "answer": "A",
+        "explanation": "DOC 1 明確指出他們於 April 25 正式加入公司。"
+      },
+      {
+        "question": "What is Sarah Jenkins's specific goal for attending the workshop?",
+        "options": {
+          "A": "To welcome the new hires to the office",
+          "B": "To apply for an external job opening",
+          "C": "To seek advice on how to secure a senior position within the company",
+          "D": "To complain about the company's recruitment process"
+        },
+        "answer": "C",
+        "explanation": "Sarah 在郵件中提到她已任職兩年，希望能轉任資深職位 (senior role)。"
+      },
+      {
+        "question": "Which of the following can be inferred about the workshop?",
+        "options": {
+          "A": "It is mandatory for all employees",
+          "B": "It will be held in the marketing department's conference room",
+          "C": "It is open to junior staff members",
+          "D": "It will focus exclusively on technical certifications"
+        },
+        "answer": "C",
+        "explanation": "DOC 1 提到鼓勵所有初階員工 (junior staff) 參加。"
+      },
+      {
+        "question": "What does Sarah Jenkins ask the new hires to clarify?",
+        "options": {
+          "A": "Whether the workshop will address internal promotions",
+          "B": "The location of the training room",
+          "C": "The reason why they left their previous jobs",
+          "D": "The salary expectations for senior roles"
+        },
+        "answer": "A",
+        "explanation": "Sarah 在郵件中詢問該研討會是否會涵蓋內部晉升策略 (internal promotion strategies)。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "Product Recall Protocol and Internal Inquiry",
+    "passages": [
+      "[DOC 1] Internal Memo\nTo: All Staff\nFrom: Quality Assurance Department\nDate: July 24\nSubject: URGENT: Product Recall – 'Arctic Fizz' Sparkling Water\n\nIt has come to our attention that a batch of 'Arctic Fizz' (Batch #AF-992) may contain minute glass particles due to a malfunctioning capping machine. Effective immediately, all retail partners are to be notified. Please remove these items from shelves and store them in the designated quarantine area in the warehouse. Do not, under any circumstances, issue refunds manually; direct all customer complaints to the centralized customer service portal. We must handle this matter with the utmost discretion to protect the brand's reputation.",
+      "[DOC 2] Email\nFrom: Chloe Laurent <c.laurent@beveragecorp.com>\nTo: Simon de Almeida <s.almeida@beveragecorp.com>\nDate: July 24, 2:15 PM\nSubject: Re: URGENT: Product Recall – 'Arctic Fizz' Sparkling Water\n\nHi Simon,\n\nI’ve just received three angry calls from local supermarket managers regarding the recall notice. They are frustrated because the warehouse manager is refusing to accept the returned stock without a specific authorization code that wasn't included in the morning memo. Also, one customer walked into our regional office demanding a cash refund for a case of Batch #AF-992. I turned them away as per the policy, but they are threatening to contact the local newspaper. Should I provide them with the official complaint portal link, or is there a specific protocol for high-profile complaints like this? Please advise as soon as possible.\n\nBest,\nChloe"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the recall of 'Arctic Fizz'?",
+        "options": {
+          "A": "The product does not meet taste standards.",
+          "B": "The packaging labels were printed incorrectly.",
+          "C": "There is a risk of glass contamination.",
+          "D": "The product has exceeded its expiration date."
+        },
+        "answer": "C",
+        "explanation": "The memo states the recall is due to 'minute glass particles' caused by a capping machine malfunction."
+      },
+      {
+        "question": "According to the memo, what should employees do with the recalled products?",
+        "options": {
+          "A": "Return them to the production line immediately.",
+          "B": "Store them in a designated quarantine area.",
+          "C": "Issue full refunds to customers who return them.",
+          "D": "Dispose of them in the facility's waste containers."
+        },
+        "answer": "B",
+        "explanation": "The memo explicitly instructs staff to 'store them in the designated quarantine area in the warehouse'."
+      },
+      {
+        "question": "What problem is Chloe Laurent reporting to Simon de Almeida?",
+        "options": {
+          "A": "The warehouse is refusing to accept returns without an authorization code.",
+          "B": "The customer service portal is currently offline.",
+          "C": "The media has already published an article about the recall.",
+          "D": "She has run out of official complaint forms for the customers."
+        },
+        "answer": "A",
+        "explanation": "Chloe mentions that retail managers are frustrated because the warehouse manager won't accept stock without a specific authorization code."
+      },
+      {
+        "question": "Based on the documents, what is Chloe expected to do when a customer requests a refund?",
+        "options": {
+          "A": "Provide a cash refund immediately to prevent bad press.",
+          "B": "Refer the customer to the centralized customer service portal.",
+          "C": "Send the customer to the warehouse to pick up a replacement.",
+          "D": "Ignore the request and wait for further instruction."
+        },
+        "answer": "B",
+        "explanation": "The memo specifies that staff should 'direct all customer complaints to the centralized customer service portal' and not issue manual refunds."
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "International AI Investment Summit Itinerary Adjustment",
+    "passages": [
+      "[DOC 1]\n\nOctober 25 - AI Investment Summit Itinerary\nLocation: Grand Continental Hotel, Geneva\n\n09:00 - 10:30: Opening Ceremony (Main Hall)\n10:45 - 12:30: High-level government meetings to discuss national AI investments (Room 402)\n12:30 - 14:00: Networking Luncheon (Garden Terrace)\n14:15 - 16:00: Panel Discussion: Ethical AI Frameworks (Room 402)\n16:30 - 18:00: Closing Session: Future Infrastructure Projects (Main Hall)\n\nAttendees: Amara Diallo (Chief Delegate), Oliver Sterling (Strategic Advisor)",
+      "[DOC 2]\n\nFrom: Events Coordination Office\nTo: Amara Diallo, Oliver Sterling\nDate: October 25, 08:15\nSubject: URGENT: Schedule Update for Today's AI Summit\n\nDear Ms. Diallo and Mr. Sterling,\n\nDue to unexpected flight delays affecting several key ministers, we have adjusted the schedule for today's session. The high-level government meetings to discuss national AI investments, originally scheduled for 10:45, have been postponed by two hours. \n\nConsequently, the Networking Luncheon will now begin at 14:30. Please note that the Panel Discussion on Ethical AI Frameworks has been canceled entirely to accommodate the extended morning meetings. The closing session remains unchanged at 16:30. We apologize for any inconvenience caused.\n\nBest regards,\nEvents Coordination Team"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the meetings scheduled in Room 402?",
+        "options": {
+          "A": "To conduct a training session for new AI developers.",
+          "B": "To discuss national AI investments.",
+          "C": "To review the hotel's infrastructure projects.",
+          "D": "To host a press conference for the general public."
+        },
+        "answer": "B",
+        "explanation": "根據 DOC 1，Room 402 的會議目的是討論國家級的人工智慧投資 (discuss national AI investments)。"
+      },
+      {
+        "question": "At what time is the high-level meeting expected to start according to the update?",
+        "options": {
+          "A": "09:00",
+          "B": "10:45",
+          "C": "12:45",
+          "D": "14:15"
+        },
+        "answer": "C",
+        "explanation": "DOC 2 指出原定 10:45 的會議延後兩小時，因此調整為 12:45 開始。"
+      },
+      {
+        "question": "Which activity has been removed from the schedule entirely?",
+        "options": {
+          "A": "The Opening Ceremony",
+          "B": "The Networking Luncheon",
+          "C": "The Panel Discussion: Ethical AI Frameworks",
+          "D": "The Closing Session"
+        },
+        "answer": "C",
+        "explanation": "DOC 2 明確提到 Panel Discussion: Ethical AI Frameworks 已被取消 (canceled entirely)。"
+      },
+      {
+        "question": "What is the new starting time for the Networking Luncheon?",
+        "options": {
+          "A": "12:30",
+          "B": "14:00",
+          "C": "14:30",
+          "D": "16:30"
+        },
+        "answer": "C",
+        "explanation": "DOC 2 說明 Networking Luncheon 改至 14:30 開始。"
+      },
+      {
+        "question": "What is the reason provided for the changes in the schedule?",
+        "options": {
+          "A": "Amara Diallo and Oliver Sterling arrived late.",
+          "B": "Technical difficulties with the AI presentation software.",
+          "C": "Unexpected flight delays involving government ministers.",
+          "D": "The Grand Continental Hotel underwent emergency maintenance."
+        },
+        "answer": "C",
+        "explanation": "DOC 2 提到行程變更的原因是關鍵部長們的班機延誤 (unexpected flight delays affecting several key ministers)。"
       }
     ]
   }
