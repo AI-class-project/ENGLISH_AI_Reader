@@ -58,6 +58,66 @@
     ]
   },
   {
+    "category": "單字克漏字",
+    "theme": "辦公室日常與人事公告",
+    "passages": [
+      "On October 17, our newest team member, Simon de Almeida, shared his insights on how he secured his position, noting that his ability to __________ his technical skills to real-world business challenges was the key factor in his successful application."
+    ],
+    "questions": [
+      {
+        "question": "On October 17, our newest team member, Simon de Almeida, shared his insights on how he secured his position, noting that his ability to ______ his technical skills to real-world business challenges was the key factor in his successful application.",
+        "options": {
+          "A": "allocate",
+          "B": "apply",
+          "C": "attain",
+          "D": "amend"
+        },
+        "answer": "B",
+        "explanation": "選項 (B) apply 意為「應用」，符合句意「將技術能力應用於現實商業挑戰」。(A) allocate 分配；(C) attain 獲得；(D) amend 修訂，皆不符合語境。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "Product Recall Notification",
+    "passages": [
+      "On July 24, Vikram Patel, the Quality Assurance Manager, issued an official statement regarding the immediate recall of the 'Zenith Sparkling Water' line, citing that the company must ______ the potential health risks associated with the packaging defect found in recent batches."
+    ],
+    "questions": [
+      {
+        "question": "On July 24, Vikram Patel, the Quality Assurance Manager, issued an official statement regarding the immediate recall of the 'Zenith Sparkling Water' line, citing that the company must ______ the potential health risks associated with the packaging defect found in recent batches.",
+        "options": {
+          "A": "mitigate",
+          "B": "implement",
+          "C": "facilitate",
+          "D": "reconcile"
+        },
+        "answer": "A",
+        "explanation": "本題考查高頻商務動詞。mitigate 意為「減輕、緩和（風險或損害）」，符合在產品召回情境中降低健康風險的語意。implement 為「實施」，facilitate 為「促進」，reconcile 為「調和」。"
+      }
+    ]
+  },
+  {
+    "category": "單字克漏字",
+    "theme": "辦公室日常與人事公告",
+    "passages": [
+      "October 25: During today's orientation, Vikram Patel shared his insights on how he successfully navigated the recruitment process, emphasizing that candidates should clearly ______ their unique skills to align with the company's long-term objectives."
+    ],
+    "questions": [
+      {
+        "question": "During today's orientation, Vikram Patel shared his insights on how he successfully navigated the recruitment process, emphasizing that candidates should clearly ______ their unique skills to align with the company's long-term objectives.",
+        "options": {
+          "A": "articulate",
+          "B": "accumulate",
+          "C": "accelerate",
+          "D": "accommodate"
+        },
+        "answer": "A",
+        "explanation": "本題考查高頻商務動詞辨析。句意為 Vikram Patel 強調求職者應清楚地「表達/闡述 (articulate)」其獨特技能。B 為累積；C 為加速；D 為容納或遷就，皆不符合語意。"
+      }
+    ]
+  },
+  {
     "category": "文法選擇",
     "theme": "辦公室日常與人事公告",
     "passages": [],
@@ -108,6 +168,24 @@
         },
         "answer": "C",
         "explanation": "本題考查分詞當形容詞的使用。當分詞修飾人（staff members）的主觀感受時，應使用過去分詞 (p.p.) 表示「感到……的」。因此，shocked（感到震驚的）符合句意，而 shocking 則是用來修飾令人震驚的事物。"
+      }
+    ]
+  },
+  {
+    "category": "文法選擇",
+    "theme": "廠房公安與生產線維護",
+    "passages": [],
+    "questions": [
+      {
+        "question": "On January 21, Simon de Almeida announced that the factory will continue to process food byproducts into renewable energy, ______ the recent technical malfunctions in the filtration unit.",
+        "options": {
+          "A": "although",
+          "B": "despite",
+          "C": "because",
+          "D": "even though"
+        },
+        "answer": "B",
+        "explanation": "本題測試連接詞與介系詞的用法。空格後接的是名詞片語 'the recent technical malfunctions'，因此必須選擇介系詞。A、C、D 皆為連接詞，後需接子句（主詞+動詞）。Despite 為介系詞，意為「儘管」，符合語意。"
       }
     ]
   },
@@ -289,6 +367,132 @@
     ]
   },
   {
+    "category": "單篇閱讀理解",
+    "theme": "Product Recall Notification",
+    "passages": [
+      "To: All Valued Customers\nFrom: Kenji Tanaka, Quality Assurance Manager\nDate: April 14\nSubject: Urgent Product Recall Notice\n\nDear Valued Customers,\n\nWe regret to inform you that we are initiating a voluntary recall of our 'Sparkling Orchard' beverage line. During a routine safety audit conducted by our lead engineer, Simon de Almeida, it was discovered that a manufacturing malfunction at our bottling facility may have resulted in trace amounts of foreign particles entering the containers. \n\nWhile the risk to consumer health is minimal, we prioritize your safety above all else. This recall applies specifically to batches produced between March 1 and April 10. Customers who purchased these products should immediately stop consumption and return the items to their original point of purchase for a full refund. We sincerely apologize for any inconvenience this may cause and are currently upgrading our filtration systems to prevent future occurrences. Thank you for your continued trust in our brand.\n\nSincerely,\n\nKenji Tanaka\nQuality Assurance Manager"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the product recall?",
+        "options": {
+          "A": "A decline in the quality of the ingredients used.",
+          "B": "A potential contamination issue discovered during an audit.",
+          "C": "A complaint filed by Simon de Almeida regarding flavor.",
+          "D": "A failure to meet government labeling regulations."
+        },
+        "answer": "B",
+        "explanation": "文章提到 Simon de Almeida 在審核中發現了製造過程的故障，導致瓶中可能出現異物，即為產品召回的原因。"
+      },
+      {
+        "question": "Which products are affected by this recall?",
+        "options": {
+          "A": "All beverages produced by the company.",
+          "B": "Only products sold after April 14.",
+          "C": "Sparkling Orchard items produced between March 1 and April 10.",
+          "D": "Bottles that were damaged during shipping to retailers."
+        },
+        "answer": "C",
+        "explanation": "文中明確指出召回範圍為 3 月 1 日至 4 月 10 日期間生產的 'Sparkling Orchard' 系列飲料。"
+      },
+      {
+        "question": "What are customers instructed to do with the affected products?",
+        "options": {
+          "A": "Contact Simon de Almeida for a replacement.",
+          "B": "Dispose of the products and send a photo to the company.",
+          "C": "Keep the products until the filtration system is upgraded.",
+          "D": "Return the items to the store where they were bought for a refund."
+        },
+        "answer": "D",
+        "explanation": "信件中指示消費者應立即停止飲用，並將產品退回原始購買地點以獲得全額退款。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "Factory Safety and Sustainable Processing Initiative",
+    "passages": [
+      "To: All Production Staff\nFrom: Vikram Patel, Operations Manager\nDate: July 15\nSubject: Mandatory Safety Protocol Updates and Sustainability Initiative\n\nDear Team,\n\nAs we continue to optimize our operations, I am pleased to announce that our facility is integrating new, innovative methods that are transforming food processing byproducts into valuable resources. While this transition represents a significant step forward in our sustainability goals, it introduces new machinery that requires strict adherence to safety regulations.\n\nDavid Vance, our Lead Safety Inspector, has identified potential hazards associated with the byproduct conversion units. Effective immediately, all staff members working near the conversion line must wear enhanced protective gear, including heat-resistant gloves and face shields. \n\nFurthermore, David Vance will be conducting a series of mandatory safety workshops starting next Monday to demonstrate the proper maintenance procedures for these units. Attendance is compulsory for all floor supervisors. Please ensure that the current production schedules are adjusted to accommodate these training sessions without disrupting the assembly line. Thank you for your continued commitment to excellence and workplace safety."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary reason for the recent changes in the facility's operations?",
+        "options": {
+          "A": "To reduce the number of staff members on the production line.",
+          "B": "To implement new methods for converting food processing byproducts into resources.",
+          "C": "To comply with new government regulations regarding food safety.",
+          "D": "To replace all outdated machinery with automated systems."
+        },
+        "answer": "B",
+        "explanation": "文章中提到「integrating new, innovative methods that are transforming food processing byproducts into valuable resources」，故選B。"
+      },
+      {
+        "question": "What is David Vance's primary responsibility according to the notice?",
+        "options": {
+          "A": "Managing the sales department and client relations.",
+          "B": "Overseeing the shipment of converted byproducts.",
+          "C": "Identifying potential hazards and conducting safety workshops.",
+          "D": "Designing new food products for the company."
+        },
+        "answer": "C",
+        "explanation": "文章指出 David Vance 是 Lead Safety Inspector，負責識別危險（identified potential hazards）並主持安全研討會（conducting a series of mandatory safety workshops）。"
+      },
+      {
+        "question": "What are floor supervisors required to do starting next Monday?",
+        "options": {
+          "A": "Submit a report on byproduct waste.",
+          "B": "Purchase new protective equipment for their teams.",
+          "C": "Attend a mandatory safety training workshop.",
+          "D": "Terminate the use of the new conversion units."
+        },
+        "answer": "C",
+        "explanation": "文章最後一段提到「David Vance will be conducting a series of mandatory safety workshops... Attendance is compulsory for all floor supervisors.」，故選C。"
+      }
+    ]
+  },
+  {
+    "category": "單篇閱讀理解",
+    "theme": "New Hire Introduction and Recruitment Insights",
+    "passages": [
+      "To: All Staff\nFrom: Human Resources Department\nDate: July 20\nSubject: Welcoming Our New Team Members\n\nWe are pleased to announce that Oliver Sterling and Chloe Laurent have joined our marketing division as Senior Strategists today. As part of our commitment to talent development, we invited both Oliver and Chloe to share their experiences regarding the recruitment process. \n\nOliver Sterling noted that his success was largely due to his ability to tailor his portfolio to reflect the company’s recent rebranding efforts. 'Understanding the firm's specific pain points before the interview was crucial,' he stated. Meanwhile, Chloe Laurent emphasized the importance of networking. She mentioned that she spent weeks engaging with current employees on professional platforms to gain insights into the company culture prior to submitting her formal application. Both new hires agree that proactive research and personalized outreach were the most effective strategies for their successful job applications. Please join us in extending a warm welcome to Oliver and Chloe as they begin their journey with us."
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the announcement on July 20?",
+        "options": {
+          "A": "To outline the benefits of the new marketing strategy.",
+          "B": "To introduce new employees and share their recruitment insights.",
+          "C": "To invite staff to a networking event with external candidates.",
+          "D": "To explain the changes in the company's rebranding project."
+        },
+        "answer": "B",
+        "explanation": "文章主要目的是歡迎新進員工 Oliver Sterling 與 Chloe Laurent，並分享他們在求職過程中的成功經驗。"
+      },
+      {
+        "question": "According to Oliver Sterling, what contributed most to his successful application?",
+        "options": {
+          "A": "His extensive experience in the marketing industry.",
+          "B": "His ability to connect with current employees online.",
+          "C": "Customizing his portfolio to match the company's rebranding.",
+          "D": "A referral from a senior executive at the firm."
+        },
+        "answer": "C",
+        "explanation": "文中提到 Oliver Sterling 認為他的成功歸功於將作品集（portfolio）針對公司的品牌重塑計畫進行調整（tailor）。"
+      },
+      {
+        "question": "How did Chloe Laurent prepare for her job application?",
+        "options": {
+          "A": "She focused on mastering the company’s internal software.",
+          "B": "She communicated with existing staff to understand the company culture.",
+          "C": "She submitted her application directly to the HR department.",
+          "D": "She attended a formal workshop on effective interview techniques."
+        },
+        "answer": "B",
+        "explanation": "文中敘述 Chloe Laurent 提到她在投遞履歷前，花了好幾週與現職員工聯繫，藉此深入了解公司文化。"
+      }
+    ]
+  },
+  {
     "category": "雙篇/多篇閱讀理解",
     "theme": "Factory Safety and Process Optimization",
     "passages": [
@@ -339,6 +543,60 @@
         },
         "answer": "B",
         "explanation": "兩篇文章顯示運營部門的變更需要維護部門的配合與專業評估，體現了跨部門協調的重要性。"
+      }
+    ]
+  },
+  {
+    "category": "雙篇/多篇閱讀理解",
+    "theme": "Office & HR Announcement: New Hire Onboarding and Strategy Sharing",
+    "passages": [
+      "[DOC 1] MEMORANDUM\nTo: All Employees\nFrom: Human Resources Department\nDate: January 15\nSubject: Welcoming New Team Members\n\nWe are pleased to announce that Oliver Sterling and Sofia Martinez have joined our Marketing Division today. As part of our commitment to professional development, we have invited them to host a knowledge-sharing session next week. Both Oliver and Sofia have demonstrated exceptional expertise in navigating competitive recruitment processes. They will be presenting their effective strategies for successful job applications, which helped them secure their positions amidst a pool of highly qualified candidates. We encourage all staff members interested in mentorship or internal mobility to attend.",
+      "[DOC 2] EMAIL\nFrom: Oliver Sterling\nTo: HR Department\nSubject: Re: Welcoming New Team Members\n\nDear HR Team,\n\nThank you for the warm welcome on this brisk January 15 morning. Sofia and I are honored to contribute to the company's growth. Regarding the upcoming session, we have decided to focus our discussion on the importance of 'tailored storytelling' in resumes and the value of networking prior to the interview stage. We believe these two pillars were instrumental in our success. We are currently finalizing the presentation slides and will send them for your review by Friday. We look forward to sharing our insights with our new colleagues.\n\nBest regards,\nOliver Sterling"
+    ],
+    "questions": [
+      {
+        "question": "What is the primary purpose of the session mentioned in the memo?",
+        "options": {
+          "A": "To conduct interviews for new marketing positions.",
+          "B": "To teach employees how to improve their job application techniques.",
+          "C": "To review the performance of the HR department.",
+          "D": "To welcome new hires to the company's annual conference."
+        },
+        "answer": "B",
+        "explanation": "The memo states that the new hires will present their 'effective strategies for successful job applications' to help other staff members."
+      },
+      {
+        "question": "What does Oliver Sterling imply about the weather on January 15?",
+        "options": {
+          "A": "It is quite cold.",
+          "B": "It is raining heavily.",
+          "C": "It is unusually warm for the season.",
+          "D": "The weather is pleasant and sunny."
+        },
+        "answer": "A",
+        "explanation": "Oliver mentions it is a 'brisk' morning, which signifies cold weather."
+      },
+      {
+        "question": "According to the email, what specific topic will the new hires emphasize?",
+        "options": {
+          "A": "Standardizing resume formats for all departments.",
+          "B": "The history of the company's marketing division.",
+          "C": "The use of tailored storytelling and networking.",
+          "D": "Methods for conducting effective performance reviews."
+        },
+        "answer": "C",
+        "explanation": "Oliver explicitly mentions that they will focus on 'tailored storytelling' in resumes and the value of 'networking'."
+      },
+      {
+        "question": "When must the presentation slides be submitted to the HR department?",
+        "options": {
+          "A": "On January 15.",
+          "B": "Before the session begins next week.",
+          "C": "By the end of the current week.",
+          "D": "After the session concludes."
+        },
+        "answer": "C",
+        "explanation": "Oliver states that they will send the slides for review 'by Friday', which is the end of the current week."
       }
     ]
   }
