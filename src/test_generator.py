@@ -2,7 +2,6 @@ from core.engine.const import QuestionCategory
 from core.engine.factory import ToeicQuestionFactory
 from core.loader import ToeicPoolLoader
 from tool.debug import dbg
-from tool.path import PathConfig
 from tool.update_meta import DynamicMetaUpdater
 
 
@@ -40,12 +39,8 @@ def run_factory():
     # --------------------------------------------------
     # 【階段 3：持久化防線 ➔ 透過 Loader 強型別還原驗證】
     # --------------------------------------------------
-    print("\n" + "-"*50)
-    dbg.log("📖 階段 3：驗證 toeic_pool.json 最終覆蓋存檔結果與型別完整性...")
-    print("-"*50 + "\n")
-
     loader = ToeicPoolLoader()
-    verified_pool = loader.load_cached_pool(PathConfig.TOEIC_POOL)
+    verified_pool = loader.load_cached_pool()
 
     if not verified_pool:
         dbg.error("❌ 嚴重錯誤：最終還原題庫 pool 為空，請檢查儲存或模型轉換端！")

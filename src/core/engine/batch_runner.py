@@ -1,17 +1,12 @@
-import dataclasses
 import hashlib
-import json
-import os
 import time
 
 from core.const import ToeicGenCol, ToeicQuestionCol
 from core.engine.config import GENERATE_BATCH_CONFIG
 from core.engine.models import ToeicQuestionModel
 from core.llm.generator import ToeicGenerator
-from core.meta.toeic import QuestionType
 from core.storage.toeic_repo import ToeicQuestionRepository
 from tool.debug import dbg
-from tool.path import PathConfig
 
 
 class ToeicBatchRunner:
@@ -19,7 +14,6 @@ class ToeicBatchRunner:
 
     def __init__(self):
         self.generator = ToeicGenerator()
-        #self.output_dir = PathConfig.TOEIC_POOL
         self.repo = ToeicQuestionRepository()
 
     def _load_historical_fingerprints(self) -> set:

@@ -1,14 +1,9 @@
-import json
-from typing import TYPE_CHECKING
-
 from core.const import OptionKey, ToeicQuestionCol
 from core.engine.models import (QuestionOptions, ToeicQuestionModel,
                                 ToeicSubQuestion)
 from core.storage.toeic_repo import ToeicQuestionRepository
 from tool.debug import dbg
 
-if TYPE_CHECKING:
-    from tool.path import PathConfig
 
 class ToeicPoolLoader:
     """題庫載入器：負責將 Supabase 題庫還原為高階物件模型"""
@@ -16,11 +11,9 @@ class ToeicPoolLoader:
     def __init__(self):
         self.repo = ToeicQuestionRepository()
 
-    def load_cached_pool(self, pool_path=None) -> list[ToeicQuestionModel]:
+    def load_cached_pool(self) -> list[ToeicQuestionModel]:
         """
-        原本從本地 JSON 載入。
-        現在改成從 Supabase 載入。
-        pool_path 保留只是為了相容舊呼叫方式。
+        從 Supabase 載入。
         """
         try:
             dbg.log("📖 正在從 Supabase 讀取題庫")
