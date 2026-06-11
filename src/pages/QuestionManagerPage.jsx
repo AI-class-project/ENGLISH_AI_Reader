@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { toeicPool } from '../data/toeic_pool';
 import { api } from '../api/toeicApi';
 
 const TYPE_LABELS = {
@@ -258,10 +257,32 @@ export default function QuestionManagerPage() {
   const [showAdd, setShowAdd] = useState(false);
   const [search, setSearch] = useState('');
 
-  const allQuestions = [
-    ...toeicPool.cloze,
-    ...toeicPool.reading,
-  ];
+  const [allQuestions, setAllQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadQuestions = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await api.getAllQuestionList();
+      setAllQuestions(data);
+      setSelected(prev => prev ? data.find(q => q.id === prev.id) ?? null : null);
+    } catch (err) {
+      console.error(err);
+      setError(err.message ?? '題庫載入失敗');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadQuestions();
+  }, []);
+
+  const clozeCount = allQuestions.filter(q => q.type === 'cloze').length;
+  const readingCount = allQuestions.filter(q => q.type.startsWith('reading')).length;
 
   const filtered = allQuestions.filter(q => {
     const matchType = filter === 'all' || q.type === filter ||
@@ -287,8 +308,8 @@ export default function QuestionManagerPage() {
         <div className="filter-tabs">
           {[
             { id: 'all', label: `全部 (${allQuestions.length})` },
-            { id: 'cloze', label: `克漏字 (${toeicPool.cloze.length})` },
-            { id: 'reading', label: `閱讀 (${toeicPool.reading.length})` },
+            { id: 'cloze', label: `克漏字 (${clozeCount})` },
+            { id: 'reading', label: `閱讀 (${readingCount})` },
           ].map(f => (
             <button key={f.id} className={`filter-tab ${filter === f.id ? 'active' : ''}`}
               onClick={() => setFilter(f.id)}>
@@ -297,11 +318,13 @@ export default function QuestionManagerPage() {
           ))}
         </div>
         <div className="q-list">
-          {filtered.map(q => (
+          {loading && <div className="empty-state">載入題庫中...</div>}
+          {!loading && error && <div className="empty-state">{error}</div>}
+          {!loading && !error && filtered.map(q => (
             <QuestionRow key={q.id} q={q} selected={selected?.id === q.id}
               onSelect={setSelected} />
           ))}
-          {filtered.length === 0 && (
+          {!loading && !error && filtered.length === 0 && (
             <div className="empty-state">找不到符合的題目</div>
           )}
         </div>
@@ -309,7 +332,13 @@ export default function QuestionManagerPage() {
       <div className="manager-detail">
         <QuestionDetail q={selected} />
       </div>
-      {showAdd && <AddQuestionForm onClose={() => setShowAdd(false)} onSuccess={() => setShowAdd(false)} />}
+      {showAdd && <AddQuestionForm
+        onClose={() => setShowAdd(false)}
+        onSuccess={() => {
+          setShowAdd(false);
+          loadQuestions();
+        }}
+      />}
     </div>
   );
 }
