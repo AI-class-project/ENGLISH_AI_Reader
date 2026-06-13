@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { api } from '../api/toeicApi';
+import { useSession } from '../context/Sessioncontext';
 
 const MODES = [
   { id: 'cloze', label: '克漏字練習', sub: '文法・字彙單選題', icon: '✦' },
@@ -112,6 +113,8 @@ function ReadingCard({ question, index, total, onAnswers, userAnswers, showResul
 }
 
 export default function PracticePage() {
+  const { addSession } = useSession();
+
   const [mode, setMode] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -149,6 +152,27 @@ export default function PracticePage() {
 
   const handleNext = () => {
     if (currentIdx + 1 >= questions.length) {
+      // 建立這次 session 的詳細結果，存入 Context
+      const results = [];
+      questions.forEach(q => {
+        if (q.type === 'cloze') {
+          results.push({
+            supabaseId: q.supabaseId,
+            category: q.category, // 'grammar' | 'vocabulary'
+            isCorrect: userAnswers[q.id] === q.answer,
+          });
+        } else {
+          q.questions.forEach(sub => {
+            results.push({
+              supabaseId: q.supabaseId,
+              category: 'reading',
+              isCorrect: userAnswers[sub.id] === sub.answer,
+            });
+          });
+        }
+      });
+
+      addSession({ mode, results });
       setSessionDone(true);
     } else {
       setCurrentIdx(i => i + 1);
